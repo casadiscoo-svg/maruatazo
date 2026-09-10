@@ -1,0 +1,196 @@
+(()=>{
+const KEY='maruatazo-v18-landing-studio', ASSET_DB='maruatazo-v18-landing-assets', PANEL_KEY='maruatazo-v18-editor-panel-pos';
+const q=s=>document.querySelector(s), qa=s=>[...document.querySelectorAll(s)];
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+let editing=false, selected=null, dragging=false, dragStart=null, history=[], historyIndex=-1, currentSection=q('#home');
+
+// ----- UI -----
+const launcher=document.createElement('button'); launcher.id='landingEditLauncher'; launcher.textContent='EDITAR WEB ✦'; document.body.appendChild(launcher);
+const panel=document.createElement('aside'); panel.id='landingStudio'; panel.innerHTML=`
+  <div class="le-head"><div><small>MARUATAZO STUDIO · LANDING</small><b>EDITOR WEB</b></div><div><button id="leUndo">↶</button><button id="leRedo">↷</button><button id="leClose">×</button></div></div>
+  <div class="le-tabs"><button class="active" data-le-tab="layers">CAPAS</button><button data-le-tab="add">AÑADIR</button><button data-le-tab="style">ESTILO</button><button data-le-tab="fx">FX</button><button data-le-tab="page">PÁGINA</button></div>
+  <div class="le-pane active" data-le-pane="layers">
+    <div class="le-toolbar"><button id="leDesktop">DESKTOP</button><button id="leTablet">TABLET</button><button id="leMobile">MOBILE</button><button id="lePreview">PREVIEW</button></div>
+    <label class="le-field">SECCIÓN<select id="leSection"></select></label>
+    <div class="le-sub">OUTLINER</div><div id="leOutliner" class="le-outliner"></div>
+    <div class="le-toolbar"><button id="leDuplicate">DUPLICAR</button><button id="leHide">OCULTAR</button><button id="leLock">LOCK</button><button id="leDelete">BORRAR</button></div>
+  </div>
+  <div class="le-pane" data-le-pane="add">
+    <p>Añade elementos a la sección seleccionada. Después muévelos libremente.</p>
+    <div class="le-addgrid"><button data-le-add="text">＋ TEXTO</button><button data-le-add="button">＋ BOTÓN</button><button data-le-add="shape">＋ FORMA</button><button data-le-add="line">＋ LÍNEA</button><button data-le-add="image">＋ IMAGEN</button><button data-le-add="glb">＋ GLB 3D</button></div>
+    <input id="leImageFile" type="file" accept="image/*" hidden><input id="leGLBFile" type="file" accept=".glb,.gltf,model/gltf-binary,model/gltf+json" hidden>
+    <div class="le-sub">OBJETOS ATMÓSFERA</div><div class="le-addgrid"><button data-le-add="star">＋ ESTRELLA</button><button data-le-add="glow">＋ GLOW</button><button data-le-add="orb">＋ ORB</button><button data-le-add="label">＋ ETIQUETA</button></div>
+  </div>
+  <div class="le-pane" data-le-pane="style">
+    <div class="le-selected">SELECCIÓN <strong id="leSelected">NINGUNA</strong></div>
+    <label class="le-field">TEXTO / HTML<textarea id="leText" rows="3"></textarea></label>
+    <div class="le-sub">TRANSFORM</div>
+    <div class="le-numgrid"><label>X<input id="leX" type="number" step="1"></label><label>Y<input id="leY" type="number" step="1"></label><label>ROT<input id="leRot" type="number" step="1"></label><label>ESCALA<input id="leScale" type="number" step=".05" min=".05"></label></div>
+    <div class="le-numgrid"><label>ANCHO<input id="leW" type="number" step="1"></label><label>ALTO<input id="leH" type="number" step="1"></label><label>Z-INDEX<input id="leZ" type="number" step="1"></label><label>RADIO<input id="leRadius" type="number" step="1"></label></div>
+    <div class="le-sub">TIPOGRAFÍA</div>
+    <label class="le-field">FONT<select id="leFont"><option value="inherit">HEREDADA</option><option value="Arial,Helvetica,sans-serif">SANS</option><option value="Georgia,serif">EDITORIAL SERIF</option><option value="'Times New Roman',serif">TIMES</option><option value="Impact,Haettenschweiler,sans-serif">DISPLAY</option><option value="monospace">MONO</option></select></label>
+    <div class="le-numgrid"><label>TAMAÑO<input id="leFontSize" type="number" min="6"></label><label>PESO<input id="leWeight" type="number" step="100" min="100" max="900"></label><label>TRACK<input id="leLetter" type="number" step=".1"></label><label>OPACIDAD<input id="leOpacity" type="number" step=".05" min="0" max="1"></label></div>
+    <div class="le-colors"><label>TEXTO<input id="leColor" type="color"></label><label>FONDO<input id="leBg" type="color"></label><label>BORDE<input id="leBorder" type="color"></label></div>
+    <label class="le-field">ALINEACIÓN<select id="leAlign"><option>left</option><option>center</option><option>right</option></select></label>
+  </div>
+  <div class="le-pane" data-le-pane="fx">
+    <div class="le-sub">EFECTOS DEL OBJETO</div>
+    <label class="le-range">BLUR <input id="leBlur" type="range" min="0" max="30" step=".5" value="0"><output></output></label>
+    <label class="le-range">BRILLO <input id="leBright" type="range" min=".1" max="3" step=".05" value="1"><output></output></label>
+    <label class="le-range">SATURACIÓN <input id="leSat" type="range" min="0" max="3" step=".05" value="1"><output></output></label>
+    <label class="le-range">HUE <input id="leHue" type="range" min="-180" max="180" step="1" value="0"><output></output></label>
+    <label class="le-field">BLEND<select id="leBlend"><option>normal</option><option>screen</option><option>lighten</option><option>overlay</option><option>soft-light</option><option>multiply</option><option>difference</option></select></label>
+    <label class="le-field">ANIMACIÓN<select id="leAnim"><option value="none">NINGUNA</option><option value="float">FLOTAR</option><option value="pulse">PULSAR</option><option value="spin">GIRAR</option><option value="fade">FADE</option><option value="drift">DERIVA</option></select></label>
+    <div class="le-numgrid"><label>VELOCIDAD<input id="leAnimSpeed" type="number" step=".1" min=".1" value="1"></label><label>AMPLITUD<input id="leAnimAmp" type="number" step="1" value="12"></label><label>DELAY<input id="leDelay" type="number" step=".1" value="0"></label><label>DURACIÓN<input id="leDuration" type="number" step=".1" value="1.2"></label></div>
+    <div class="le-sub">ENTRADA</div><label class="le-field">REVEAL<select id="leReveal"><option value="none">NINGUNO</option><option value="fade-up">FADE UP</option><option value="fade-in">FADE IN</option><option value="zoom-in">ZOOM IN</option><option value="blur-in">BLUR IN</option></select></label>
+  </div>
+  <div class="le-pane" data-le-pane="page">
+    <div class="le-sub">ATMÓSFERA GLOBAL</div>
+    <div class="le-colors"><label>CIELO<input id="leSky" type="color" value="#0a2842"></label><label>HORIZONTE<input id="leHorizon" type="color" value="#5ed2d0"></label><label>AGUA<input id="leWater" type="color" value="#0b6177"></label></div>
+    <label class="le-range">ESTRELLAS <input id="leStars" type="range" min="0" max="2" step=".05" value="1"><output></output></label>
+    <label class="le-range">GRAIN <input id="lePageGrain" type="range" min="0" max="1" step=".02" value=".18"><output></output></label>
+    <label class="le-range">VIGNETTE <input id="lePageVignette" type="range" min="0" max="1" step=".02" value=".24"><output></output></label>
+    <label class="le-range">GLOW <input id="lePageGlow" type="range" min="0" max="2" step=".05" value=".7"><output></output></label>
+    <div class="le-sub">PROYECTO</div>
+    <div class="le-toolbar"><button id="leSave">GUARDAR ⌘S</button><button id="leExport">EXPORTAR JSON</button><button id="leImport">IMPORTAR JSON</button><button id="leReset">RESET</button></div><input id="leProjectFile" type="file" accept="application/json,.json" hidden>
+    <small class="le-note">Doble click sobre texto = editar directamente. Arrastra cualquier elemento seleccionado. Shift = movimiento fino. ⌘S/Ctrl+S = guardar. Los cambios también se autoguardan.</small>
+  </div>`;
+document.body.appendChild(panel);
+
+// ----- movable editor window -----
+const panelHead=panel.querySelector('.le-head');
+let panelDrag=null;
+function restorePanelPosition(){try{const p=JSON.parse(localStorage.getItem(PANEL_KEY)||'null');if(!p)return;panel.style.left=p.left+'px';panel.style.top=p.top+'px';panel.style.right='auto';panel.style.bottom='auto';if(p.width)panel.style.width=p.width+'px';if(p.height)panel.style.height=p.height+'px';}catch(e){}}
+function savePanelPosition(){const r=panel.getBoundingClientRect();localStorage.setItem(PANEL_KEY,JSON.stringify({left:r.left,top:r.top,width:r.width,height:r.height}));}
+panelHead.title='Arrastra esta barra para mover el editor';
+panelHead.addEventListener('pointerdown',e=>{if(e.target.closest('button,input,select,textarea'))return;const r=panel.getBoundingClientRect();panelDrag={dx:e.clientX-r.left,dy:e.clientY-r.top,id:e.pointerId};panel.style.left=r.left+'px';panel.style.top=r.top+'px';panel.style.right='auto';panel.style.bottom='auto';panelHead.setPointerCapture?.(e.pointerId);e.preventDefault();});
+panelHead.addEventListener('pointermove',e=>{if(!panelDrag)return;const maxX=Math.max(0,innerWidth-panel.offsetWidth),maxY=Math.max(0,innerHeight-70);panel.style.left=clamp(e.clientX-panelDrag.dx,0,maxX)+'px';panel.style.top=clamp(e.clientY-panelDrag.dy,0,maxY)+'px';});
+panelHead.addEventListener('pointerup',e=>{if(!panelDrag)return;panelDrag=null;panelHead.releasePointerCapture?.(e.pointerId);savePanelPosition();});
+panel.addEventListener('mouseup',()=>setTimeout(savePanelPosition,0));
+restorePanelPosition();
+
+// ----- editable discovery -----
+const sections=qa('main > section:not(.portal)');
+sections.forEach((s,i)=>{s.dataset.leSection=s.id||`section-${i}`; if(!s.style.position)s.style.position='relative';});
+const sectionSelect=q('#leSection'); sections.forEach(s=>{const o=document.createElement('option');o.value=s.dataset.leSection;o.textContent=(s.id||'SECCIÓN').toUpperCase();sectionSelect.appendChild(o)});
+function isEditorUI(el){return el.closest('#landingStudio,#landingEditLauncher,.bottom')}
+function stableDomId(el){
+  if(el.id) return 'id-'+el.id;
+  const parts=[]; let n=el;
+  while(n && n!==document.body){
+    const parent=n.parentElement; if(!parent) break;
+    const siblings=[...parent.children].filter(x=>x.tagName===n.tagName);
+    const idx=siblings.indexOf(n);
+    parts.unshift(n.tagName.toLowerCase()+':'+idx);
+    if(parent.id){parts.unshift('id-'+parent.id);break}
+    n=parent;
+  }
+  return 'dom-'+parts.join('/');
+}
+function tagEditables(){
+  const selectors=['.top','.brand','#topTickets','#enterCabins','.hero-copy','.hero-copy small','.hero-copy h1','.hero-copy p','.orbit-nav a','.rock','.waterline','.ticket-destination','.hero-caption','.hero-scroll','.section > .kicker','.section h2','.section p','.cards > button','.line-grid img','.coming','.merch-card','.info-grid details','.photo-strip img','.section-head'];
+  qa(selectors.join(',')).forEach(el=>{if(isEditorUI(el))return; if(!el.dataset.leId)el.dataset.leId=stableDomId(el); el.classList.add('le-editable')});
+  qa('.le-added').forEach(el=>el.classList.add('le-editable'));
+}
+tagEditables();
+
+function rootSection(el){return el?.closest('[data-le-section]')||q('#home')}
+function stateOf(el){return {id:el.dataset.leId,html:el.innerHTML,x:+(el.dataset.leX||0),y:+(el.dataset.leY||0),rot:+(el.dataset.leRot||0),scale:+(el.dataset.leScale||1),w:el.style.width||'',h:el.style.height||'',z:el.style.zIndex||'',radius:el.style.borderRadius||'',font:el.style.fontFamily||'',fontSize:el.style.fontSize||'',weight:el.style.fontWeight||'',letter:el.style.letterSpacing||'',opacity:el.style.opacity||'',color:el.style.color||'',bg:el.style.backgroundColor||'',border:el.style.borderColor||'',align:el.style.textAlign||'',blur:+(el.dataset.leBlur||0),bright:+(el.dataset.leBright||1),sat:+(el.dataset.leSat||1),hue:+(el.dataset.leHue||0),blend:el.style.mixBlendMode||'',anim:el.dataset.leAnim||'none',animSpeed:+(el.dataset.leAnimSpeed||1),animAmp:+(el.dataset.leAnimAmp||12),delay:+(el.dataset.leDelay||0),duration:+(el.dataset.leDuration||1.2),reveal:el.dataset.leReveal||'none',hidden:el.dataset.leHidden==='1',deleted:el.dataset.leDeleted==='1',locked:el.dataset.leLocked==='1',added:el.classList.contains('le-added'),tag:el.tagName,section:rootSection(el)?.dataset.leSection,kind:el.dataset.leKind||'' ,src:el.tagName==='IMG'?el.src:'',assetId:el.dataset.assetId||''};}
+function applyTransform(el){el.style.setProperty('--le-x',(+(el.dataset.leX||0))+'px');el.style.setProperty('--le-y',(+(el.dataset.leY||0))+'px');el.style.setProperty('--le-r',(+(el.dataset.leRot||0))+'deg');el.style.setProperty('--le-s',+(el.dataset.leScale||1));}
+function applyFx(el){const b=+(el.dataset.leBlur||0),br=+(el.dataset.leBright||1),s=+(el.dataset.leSat||1),h=+(el.dataset.leHue||0);el.style.filter=`blur(${b}px) brightness(${br}) saturate(${s}) hue-rotate(${h}deg)`;el.dataset.leAnim=el.dataset.leAnim||'none';el.style.setProperty('--le-speed',(+(el.dataset.leAnimSpeed||1))+'s');el.style.setProperty('--le-amp',(+(el.dataset.leAnimAmp||12))+'px');el.style.setProperty('--le-delay',(+(el.dataset.leDelay||0))+'s');el.style.setProperty('--le-duration',(+(el.dataset.leDuration||1.2))+'s');}
+function applyState(el,s){
+  if(s.html!=null && el.tagName!=='IMG' && !el.classList.contains('le-glb'))el.innerHTML=s.html;
+  ['x','y','rot','scale'].forEach(k=>el.dataset['le'+k[0].toUpperCase()+k.slice(1)]=s[k]??({x:0,y:0,rot:0,scale:1}[k]));
+  el.style.width=s.w||'';el.style.height=s.h||'';el.style.zIndex=s.z||'';el.style.borderRadius=s.radius||'';el.style.fontFamily=s.font||'';el.style.fontSize=s.fontSize||'';el.style.fontWeight=s.weight||'';el.style.letterSpacing=s.letter||'';el.style.opacity=s.opacity||'';el.style.color=s.color||'';el.style.backgroundColor=s.bg||'';el.style.borderColor=s.border||'';el.style.textAlign=s.align||'';el.style.mixBlendMode=s.blend||'';
+  el.dataset.leBlur=s.blur??0;el.dataset.leBright=s.bright??1;el.dataset.leSat=s.sat??1;el.dataset.leHue=s.hue??0;el.dataset.leAnim=s.anim||'none';el.dataset.leAnimSpeed=s.animSpeed??1;el.dataset.leAnimAmp=s.animAmp??12;el.dataset.leDelay=s.delay??0;el.dataset.leDuration=s.duration??1.2;el.dataset.leReveal=s.reveal||'none';el.dataset.leHidden=s.hidden?'1':'0';el.dataset.leDeleted=s.deleted?'1':'0';el.dataset.leLocked=s.locked?'1':'0';
+  el.style.display=(s.hidden||s.deleted)?'none':'';applyTransform(el);applyFx(el);
+}
+
+// ----- selection / outliner -----
+function select(el){if(selected)selected.classList.remove('le-selected-el');selected=el;if(el){el.classList.add('le-selected-el');currentSection=rootSection(el);sectionSelect.value=currentSection.dataset.leSection;}syncInspector();rebuildOutliner();}
+function rebuildOutliner(){const box=q('#leOutliner');box.innerHTML='';const sec=q(`[data-le-section="${CSS.escape(sectionSelect.value)}"]`)||currentSection;currentSection=sec;const items=qa('.le-editable').filter(e=>rootSection(e)===sec||e===q('.top'));items.forEach(el=>{const r=document.createElement('div');r.className='le-layer'+(el===selected?' active':'');r.innerHTML=`<span>${el.dataset.leKind||el.tagName.toLowerCase()}</span><b>${(el.textContent||el.alt||el.dataset.leId).trim().slice(0,28)||el.dataset.leId}</b><i>${el.dataset.leLocked==='1'?'⌁':''}${el.dataset.leHidden==='1'?'◌':'●'}</i>`;r.onclick=()=>select(el);box.appendChild(r)})}
+function hexOf(s,f='#ffffff'){if(!s)return f;const c=document.createElement('canvas').getContext('2d');c.fillStyle=s;const v=c.fillStyle;if(/^#[0-9a-f]{6}$/i.test(v))return v;return f}
+function syncInspector(){const s=selected?stateOf(selected):null;q('#leSelected').textContent=s?(selected.dataset.leKind||selected.tagName)+' · '+selected.dataset.leId:'NINGUNA';const set=(id,v)=>{const e=q(id);if(e)e.value=v??''};if(!s){set('#leText','');return}set('#leText',selected.tagName==='IMG'?'[IMAGEN]':selected.innerHTML);set('#leX',s.x);set('#leY',s.y);set('#leRot',s.rot);set('#leScale',s.scale);set('#leW',parseFloat(s.w)||Math.round(selected.getBoundingClientRect().width));set('#leH',parseFloat(s.h)||Math.round(selected.getBoundingClientRect().height));set('#leZ',parseInt(s.z)||0);set('#leRadius',parseFloat(s.radius)||0);set('#leFont',s.font||'inherit');set('#leFontSize',parseFloat(s.fontSize)||parseFloat(getComputedStyle(selected).fontSize));set('#leWeight',parseInt(s.weight)||parseInt(getComputedStyle(selected).fontWeight)||400);set('#leLetter',parseFloat(s.letter)||0);set('#leOpacity',s.opacity===''?1:s.opacity);set('#leColor',hexOf(getComputedStyle(selected).color,'#ffffff'));set('#leBg',hexOf(getComputedStyle(selected).backgroundColor,'#000000'));set('#leBorder',hexOf(getComputedStyle(selected).borderColor,'#ffffff'));set('#leAlign',s.align||getComputedStyle(selected).textAlign||'left');set('#leBlur',s.blur);set('#leBright',s.bright);set('#leSat',s.sat);set('#leHue',s.hue);set('#leBlend',s.blend||'normal');set('#leAnim',s.anim);set('#leAnimSpeed',s.animSpeed);set('#leAnimAmp',s.animAmp);set('#leDelay',s.delay);set('#leDuration',s.duration);set('#leReveal',s.reveal)}
+
+// ----- history / save -----
+function capture(){return {elements:qa('.le-editable').map(stateOf),page:readPage()}}
+function pushHistory(){const s=JSON.stringify(capture());if(history[historyIndex]===s)return;history=history.slice(0,historyIndex+1);history.push(s);if(history.length>30)history.shift();historyIndex=history.length-1}
+function restore(snapshot){if(typeof snapshot==='string')snapshot=JSON.parse(snapshot);const known=new Map(qa('.le-editable').map(e=>[e.dataset.leId,e]));(snapshot.elements||[]).forEach(s=>{let el=known.get(s.id);if(!el&&s.added){el=createAddedFromState(s);known.set(s.id,el)}if(el)applyState(el,s)});qa('.le-added').forEach(el=>{if(!(snapshot.elements||[]).some(s=>s.id===el.dataset.leId))el.remove()});applyPage(snapshot.page||{});tagEditables();rebuildOutliner();select(null)}
+let saveTimer=null;
+function save(showStatus=true){
+  try{
+    const payload=JSON.stringify(capture());
+    localStorage.setItem(KEY,payload);
+    localStorage.setItem(KEY+'-saved-at',String(Date.now()));
+    // Read-back check so a failed/blocked storage write is never reported as saved.
+    if(localStorage.getItem(KEY)!==payload) throw new Error('No se pudo verificar el guardado');
+    if(showStatus){const b=q('#leSave');if(b){b.textContent='GUARDADO ✓';setTimeout(()=>b.textContent='GUARDAR ⌘S',900)}}
+    return true;
+  }catch(err){
+    console.error('MARUATAZO save failed',err);
+    const b=q('#leSave');if(b){b.textContent='ERROR AL GUARDAR';setTimeout(()=>b.textContent='GUARDAR ⌘S',1800)}
+    return false;
+  }
+}
+function autosave(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>save(false),120)}
+function load(){try{const raw=localStorage.getItem(KEY);if(!raw)return;const d=JSON.parse(raw);if(d)restore(d)}catch(e){console.warn('MARUATAZO load failed',e)}}
+
+// ----- add assets -----
+function makeAdded(tag='div',kind='element'){const sec=currentSection||q('#home'),el=document.createElement(tag);el.className='le-added le-editable';el.dataset.leId='added-'+Date.now()+'-'+Math.random().toString(36).slice(2,6);el.dataset.leKind=kind;el.dataset.leX=40;el.dataset.leY=40;el.dataset.leRot=0;el.dataset.leScale=1;el.style.position='absolute';el.style.left='50%';el.style.top='50%';el.style.zIndex='20';sec.appendChild(el);applyTransform(el);return el}
+function createAddedFromState(s){const sec=q(`[data-le-section="${CSS.escape(s.section||'home')}"]`)||q('#home');let el;if(s.kind==='image'){el=document.createElement('img');el.src=s.src||''}else if(s.kind==='glb'){el=document.createElement('div');el.classList.add('le-glb');el.dataset.assetId=s.assetId||''}else el=document.createElement(s.tag&&/^(DIV|SPAN|BUTTON|P|H1|H2|A)$/i.test(s.tag)?s.tag:'div');el.classList.add('le-added','le-editable');el.dataset.leId=s.id;el.dataset.leKind=s.kind||'element';el.style.position='absolute';el.style.left='50%';el.style.top='50%';el.style.zIndex='20';sec.appendChild(el);if(s.kind==='glb')setupGLBElement(el,s.assetId);return el}
+function add(kind){let el;if(kind==='text'){el=makeAdded('div','text');el.textContent='NUEVO TEXTO';el.style.font='700 42px Georgia';el.style.color='#eef8f2'}else if(kind==='button'){el=makeAdded('button','button');el.textContent='BOTÓN →';el.style.padding='14px 20px';el.style.border='1px solid rgba(255,255,255,.5)';el.style.background='rgba(5,20,35,.5)';el.style.color='#fff'}else if(kind==='shape'){el=makeAdded('div','shape');el.style.width='120px';el.style.height='120px';el.style.borderRadius='50%';el.style.background='#6de7db'}else if(kind==='line'){el=makeAdded('div','line');el.style.width='180px';el.style.height='2px';el.style.background='#d7fff8'}else if(kind==='star'){el=makeAdded('div','star');el.textContent='✦';el.style.fontSize='34px';el.style.color='#a8fff5';el.dataset.leAnim='pulse';applyFx(el)}else if(kind==='glow'){el=makeAdded('div','glow');el.style.width='180px';el.style.height='180px';el.style.borderRadius='50%';el.style.background='radial-gradient(circle,rgba(72,255,229,.65),rgba(72,255,229,0) 68%)';el.style.mixBlendMode='screen'}else if(kind==='orb'){el=makeAdded('div','orb');el.style.width='90px';el.style.height='90px';el.style.borderRadius='50%';el.style.background='radial-gradient(circle at 35% 30%,#dcfff8,#27a3aa 45%,#08374a 76%)';el.style.boxShadow='0 0 50px rgba(73,240,224,.32)'}else if(kind==='label'){el=makeAdded('div','label');el.textContent='MARUATA';el.style.font='700 11px Arial';el.style.letterSpacing='.18em';el.style.color='#d9f5ee'}else if(kind==='image'){q('#leImageFile').click();return}else if(kind==='glb'){q('#leGLBFile').click();return}if(el){select(el);pushHistory();autosave();q('[data-le-tab="style"]').click()}}
+qa('[data-le-add]').forEach(b=>b.onclick=()=>add(b.dataset.leAdd));
+q('#leImageFile').onchange=e=>{const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>{const el=makeAdded('img','image');el.src=r.result;el.style.width='260px';el.style.height='auto';select(el);pushHistory()};r.readAsDataURL(f);e.target.value=''};
+
+// ----- simple landing GLB -----
+function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open(ASSET_DB,1);r.onupgradeneeded=()=>r.result.createObjectStore('assets');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
+async function storeBlob(id,b){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction('assets','readwrite');tx.objectStore('assets').put(b,id);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
+async function getBlob(id){const db=await openDB();return new Promise((res,rej)=>{const r=db.transaction('assets').objectStore('assets').get(id);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
+async function setupGLBElement(el,assetId,blob){if(!window.THREE||!THREE.GLTFLoader)return;el.classList.add('le-glb');el.dataset.assetId=assetId;el.style.width=el.style.width||'320px';el.style.height=el.style.height||'260px';el.style.background='radial-gradient(circle at 50% 55%,rgba(84,224,203,.13),transparent 65%)';const canvas=document.createElement('canvas');canvas.style.cssText='width:100%;height:100%;display:block;pointer-events:none';el.innerHTML='';el.appendChild(canvas);blob=blob||await getBlob(assetId);if(!blob)return;const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputEncoding=THREE.sRGBEncoding;const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(34,1,.1,100);cam.position.set(0,1.4,5);scene.add(new THREE.HemisphereLight(0xbdefff,0x14212b,1.8));const d=new THREE.DirectionalLight(0xffc18c,2);d.position.set(4,5,3);scene.add(d);const url=URL.createObjectURL(blob);new THREE.GLTFLoader().load(url,g=>{URL.revokeObjectURL(url);const obj=g.scene,box=new THREE.Box3().setFromObject(obj),size=new THREE.Vector3(),center=new THREE.Vector3();box.getSize(size);box.getCenter(center);obj.position.sub(center);obj.scale.setScalar(2.4/(Math.max(size.x,size.y,size.z)||1));scene.add(obj);const loop=()=>{if(!el.isConnected)return;requestAnimationFrame(loop);obj.rotation.y+=.004;const w=el.clientWidth||320,h=el.clientHeight||260;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();renderer.render(scene,cam)};loop()})}
+q('#leGLBFile').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;const id='landing-glb-'+Date.now();await storeBlob(id,f);const el=makeAdded('div','glb');el.dataset.assetId=id;await setupGLBElement(el,id,f);select(el);pushHistory();autosave();e.target.value=''};
+
+// ----- inspector events -----
+const mut=(fn)=>{if(!selected||selected.dataset.leLocked==='1')return;fn(selected);applyTransform(selected);applyFx(selected);pushHistory();rebuildOutliner();autosave()};
+q('#leText').onchange=e=>mut(el=>{if(el.tagName!=='IMG'&&!el.classList.contains('le-glb'))el.innerHTML=e.target.value});
+[['#leX','leX'],['#leY','leY'],['#leRot','leRot'],['#leScale','leScale']].forEach(([id,k])=>q(id).oninput=e=>mut(el=>el.dataset[k]=e.target.value));
+q('#leW').oninput=e=>mut(el=>el.style.width=e.target.value?e.target.value+'px':'');q('#leH').oninput=e=>mut(el=>el.style.height=e.target.value?e.target.value+'px':'');q('#leZ').oninput=e=>mut(el=>el.style.zIndex=e.target.value);q('#leRadius').oninput=e=>mut(el=>el.style.borderRadius=e.target.value+'px');
+q('#leFont').onchange=e=>mut(el=>el.style.fontFamily=e.target.value);q('#leFontSize').oninput=e=>mut(el=>el.style.fontSize=e.target.value+'px');q('#leWeight').oninput=e=>mut(el=>el.style.fontWeight=e.target.value);q('#leLetter').oninput=e=>mut(el=>el.style.letterSpacing=e.target.value+'px');q('#leOpacity').oninput=e=>mut(el=>el.style.opacity=e.target.value);q('#leColor').oninput=e=>mut(el=>el.style.color=e.target.value);q('#leBg').oninput=e=>mut(el=>el.style.backgroundColor=e.target.value);q('#leBorder').oninput=e=>mut(el=>{el.style.borderStyle='solid';el.style.borderColor=e.target.value});q('#leAlign').onchange=e=>mut(el=>el.style.textAlign=e.target.value);
+[['#leBlur','leBlur'],['#leBright','leBright'],['#leSat','leSat'],['#leHue','leHue'],['#leAnimSpeed','leAnimSpeed'],['#leAnimAmp','leAnimAmp'],['#leDelay','leDelay'],['#leDuration','leDuration']].forEach(([id,k])=>q(id).oninput=e=>mut(el=>el.dataset[k]=e.target.value));q('#leBlend').onchange=e=>mut(el=>el.style.mixBlendMode=e.target.value);q('#leAnim').onchange=e=>mut(el=>el.dataset.leAnim=e.target.value);q('#leReveal').onchange=e=>mut(el=>el.dataset.leReveal=e.target.value);
+
+q('#leDuplicate').onclick=()=>{if(!selected)return;const s=stateOf(selected);s.id='added-'+Date.now();s.added=true;s.x+=24;s.y+=24;const c=createAddedFromState(s);applyState(c,s);select(c);pushHistory();autosave()};q('#leHide').onclick=()=>mut(el=>{el.dataset.leHidden=el.dataset.leHidden==='1'?'0':'1';el.style.display=el.dataset.leHidden==='1'?'none':''});q('#leLock').onclick=()=>mut(el=>el.dataset.leLocked=el.dataset.leLocked==='1'?'0':'1');q('#leDelete').onclick=()=>{if(!selected)return;const el=selected;if(el.classList.contains('le-added')){el.remove()}else{el.dataset.leDeleted='1';el.style.display='none'}selected=null;pushHistory();rebuildOutliner();syncInspector();autosave()};
+
+// ----- page look -----
+function readPage(){return {sky:q('#leSky').value,horizon:q('#leHorizon').value,water:q('#leWater').value,stars:+q('#leStars').value,grain:+q('#lePageGrain').value,vignette:+q('#lePageVignette').value,glow:+q('#lePageGlow').value}}
+function applyPage(p=readPage()){const root=document.documentElement;root.style.setProperty('--le-sky',p.sky||'#0a2842');root.style.setProperty('--le-horizon',p.horizon||'#5ed2d0');root.style.setProperty('--le-water',p.water||'#0b6177');root.style.setProperty('--le-stars',p.stars??1);root.style.setProperty('--le-page-grain',p.grain??.18);root.style.setProperty('--le-page-vignette',p.vignette??.24);root.style.setProperty('--le-page-glow',p.glow??.7);Object.entries({leSky:p.sky,leHorizon:p.horizon,leWater:p.water,leStars:p.stars,lePageGrain:p.grain,lePageVignette:p.vignette,lePageGlow:p.glow}).forEach(([id,v])=>{const e=q('#'+id);if(e&&v!=null)e.value=v})}
+['#leSky','#leHorizon','#leWater','#leStars','#lePageGrain','#lePageVignette','#lePageGlow'].forEach(id=>q(id).oninput=()=>{applyPage();pushHistory();autosave()});
+
+// ----- tabs / editor mode -----
+qa('[data-le-tab]').forEach(b=>b.onclick=()=>{qa('[data-le-tab]').forEach(x=>x.classList.toggle('active',x===b));qa('[data-le-pane]').forEach(p=>p.classList.toggle('active',p.dataset.lePane===b.dataset.leTab))});
+sectionSelect.onchange=()=>{currentSection=q(`[data-le-section="${CSS.escape(sectionSelect.value)}"]`);select(null);rebuildOutliner()};
+function setEditing(on){editing=on;document.body.classList.toggle('landing-editing',on);panel.classList.toggle('show',on);launcher.textContent=on?'PREVIEW WEB ◉':'EDITAR WEB ✦';if(!on)select(null)}
+launcher.onclick=()=>setEditing(!editing);q('#leClose').onclick=()=>setEditing(false);q('#lePreview').onclick=()=>setEditing(false);
+q('#leDesktop').onclick=()=>document.body.dataset.lePreview='desktop';q('#leTablet').onclick=()=>document.body.dataset.lePreview='tablet';q('#leMobile').onclick=()=>document.body.dataset.lePreview='mobile';
+
+// ----- click / drag / direct text edit -----
+document.addEventListener('pointerdown',e=>{if(!editing||isEditorUI(e.target))return;const el=e.target.closest('.le-editable');if(!el)return;e.preventDefault();e.stopPropagation();select(el);if(el.dataset.leLocked==='1')return;dragging=true;dragStart={mx:e.clientX,my:e.clientY,x:+(el.dataset.leX||0),y:+(el.dataset.leY||0)};el.setPointerCapture?.(e.pointerId)},true);
+// In edit mode, editable links/buttons are objects, never navigation/actions.
+document.addEventListener('click',e=>{if(!editing||isEditorUI(e.target))return;const el=e.target.closest('.le-editable');if(!el)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();select(el);},true);
+// Also block native drag/navigation behavior on anchors/images while editing.
+document.addEventListener('dragstart',e=>{if(!editing||isEditorUI(e.target))return;if(e.target.closest('.le-editable')){e.preventDefault();e.stopPropagation();}},true);
+document.addEventListener('pointermove',e=>{if(!editing||!dragging||!selected)return;const fine=e.shiftKey?.25:1;selected.dataset.leX=dragStart.x+(e.clientX-dragStart.mx)*fine;selected.dataset.leY=dragStart.y+(e.clientY-dragStart.my)*fine;applyTransform(selected);syncInspector()},true);
+document.addEventListener('pointerup',()=>{if(dragging){dragging=false;pushHistory();autosave()}},true);
+document.addEventListener('dblclick',e=>{if(!editing)return;const el=e.target.closest('.le-editable');if(!el||el.tagName==='IMG'||el.classList.contains('le-glb'))return;e.preventDefault();el.contentEditable='true';el.focus();const done=()=>{el.contentEditable='false';el.removeEventListener('blur',done);pushHistory();syncInspector();autosave()};el.addEventListener('blur',done)},true);
+
+// ----- project controls -----
+q('#leSave').onclick=save;q('#leExport').onclick=()=>{const blob=new Blob([JSON.stringify(capture(),null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='maruatazo-web-v13.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};q('#leImport').onclick=()=>q('#leProjectFile').click();q('#leProjectFile').onchange=async e=>{try{restore(JSON.parse(await e.target.files[0].text()));save()}catch(err){alert('Proyecto inválido')}e.target.value=''};q('#leReset').onclick=()=>{if(confirm('¿Restaurar la landing original?')){localStorage.removeItem(KEY);location.reload()}};
+q('#leUndo').onclick=()=>{if(historyIndex>0){historyIndex--;restore(history[historyIndex])}};q('#leRedo').onclick=()=>{if(historyIndex<history.length-1){historyIndex++;restore(history[historyIndex])}};
+window.addEventListener('keydown',e=>{const mod=e.metaKey||e.ctrlKey;if(mod&&e.key.toLowerCase()==='s'){e.preventDefault();save();return}if(!editing)return;if(mod&&e.key.toLowerCase()==='z'){e.preventDefault();q(e.shiftKey?'#leRedo':'#leUndo').click();return}if(/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName||''))return;if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();q('#leDelete').click()}if(e.key==='Escape')setEditing(false)});
+window.addEventListener('beforeunload',()=>save(false));
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')save(false)});
+
+// outputs
+qa('.le-range').forEach(l=>{const i=l.querySelector('input'),o=l.querySelector('output');const upd=()=>o.textContent=i.value;i.addEventListener('input',upd);upd()});
+
+// load persistent state and delayed GLBs
+load();tagEditables();qa('.le-glb[data-asset-id]').forEach(el=>setupGLBElement(el,el.dataset.assetId));pushHistory();rebuildOutliner();
+})();

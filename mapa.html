@@ -1,0 +1,47 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MARUATAZO XII — Cabañas + Mapa 3D</title><link rel="stylesheet" href="style.css"></head><body class="map-page">
+<header class="top map-top"><a class="brand" href="index.html">← MARUATAZO <b>XII</b></a><a class="ticket mini" href="index.html">VOLVER A LA WEB ↗</a></header>
+<main><section class="section mapsec" id="mapa"><div class="section-head"><div><p class="kicker">02 — EXPLORA</p><h2>MAPA 3D DE<br/>MARUATAZO</h2></div><p>Arrastra para girar · scroll/pinch para acercarte · toca los lugares para explorarlos. Distribución conceptual por ahora.</p></div><div class="world3d" id="world3d"><canvas id="worldCanvas"></canvas><div class="worldhud"><div class="worldhint">ARRASTRA ↔ · ZOOM ↕ · CLICK PARA EXPLORAR</div><div class="worldlegend">● Cabañas   ▲ Camping   ♪ Terraza   ☀ Playa</div></div><div class="worldactions"><button id="editWorld">EDITAR MAPA ✎</button><button id="resetWorld">VISTA GENERAL ↺</button></div><div class="placecard" id="placecard"><b id="placeTitle">MARUATAZO</b><p id="placeText"></p></div>
+<div class="editorpanel terrain-editor" id="editorPanel">
+<div class="editorhead"><div><small>MARUATA WORLD BUILDER</small><b>EDITOR DEL LUGAR</b></div><button id="closeEditor">×</button></div>
+<div class="editor-tabs">
+<button class="active" data-editor-tab="terrain">TERRENO</button><button data-editor-tab="sea">MAR</button><button data-editor-tab="objects">OBJETOS</button><button data-editor-tab="selected">SELECCIÓN</button>
+</div>
+<div class="editorpane active" data-editor-pane="terrain">
+<p>Modela la ladera a mano. Arrastra directamente sobre el terreno.</p>
+<div class="toolgrid terrain-tools">
+<button class="active" data-editor-tool="raise">▲ SUBIR</button><button data-editor-tool="lower">▼ BAJAR</button>
+<button data-editor-tool="smooth">≈ SUAVIZAR</button><button data-editor-tool="flatten">━ APLANAR</button>
+</div>
+<label class="editorrange">TAMAÑO DEL PINCEL <input id="brushRadius" max="12" min="1" step=".5" type="range" value="4.5"/><output id="brushRadiusOut">4.5 m</output></label>
+<label class="editorrange">FUERZA <input id="brushStrength" max=".8" min=".04" step=".04" type="range" value=".24"/><output id="brushStrengthOut">0.24</output></label>
+<div class="editorsub">MATERIAL / PISO</div>
+<div class="materialgrid">
+<button data-editor-tool="paint-sand"><i class="swatch sand"></i>ARENA</button><button data-editor-tool="paint-grass"><i class="swatch grass"></i>PASTO</button>
+<button data-editor-tool="paint-rock"><i class="swatch rockmat"></i>ROCA</button><button data-editor-tool="paint-dirt"><i class="swatch dirt"></i>TIERRA</button>
+</div>
+<div class="editorgrid"><button id="saveTerrain">GUARDAR TERRENO</button><button id="resetTerrain">RESET TERRENO</button></div>
+</div>
+<div class="editorpane" data-editor-pane="sea">
+<p>Sube o baja todo el mar sin perder las olas. Ajusta también su altura y velocidad en tiempo real.</p>
+<label class="editorrange">NIVEL DEL MAR <input id="seaLevel" max="6" min="-1.5" step=".05" type="range" value="-.10"/><output id="seaLevelOut">-0.10 m</output></label>
+<label class="editorrange">ALTURA DE OLAS <input id="waveHeight" max="4" min="0" step=".05" type="range" value="1"/><output id="waveHeightOut">1.00×</output></label>
+<label class="editorrange">VELOCIDAD DE OLAS <input id="waveSpeed" max="3" min="0" step=".05" type="range" value="1"/><output id="waveSpeedOut">1.00×</output></label>
+<div class="editorgrid"><button id="saveSea">GUARDAR MAR</button><button id="resetSea">RESET MAR</button></div>
+<small>El nivel mueve la superficie completa, incluyendo las olas animadas. Puedes inundar la playa si quieres.</small>
+</div>
+<div class="editorpane" data-editor-pane="objects">
+<p>Elige un objeto y luego toca el terreno para colocarlo. Después puedes moverlo y girarlo.</p>
+<div class="objectgrid">
+<button data-editor-tool="add-cabin">＋ CABAÑA</button><button data-editor-tool="add-palm">＋ PALMERA</button>
+<button data-editor-tool="add-rock">＋ ROCA</button><button data-editor-tool="add-tent">＋ CAMPING</button>
+<button data-editor-tool="add-stage">＋ ESCENARIO</button><button data-editor-tool="move">↔ MOVER</button>
+</div>
+</div>
+<div class="editorpane" data-editor-pane="selected">
+<div class="editorselected">SELECCIÓN <strong id="editorSelected">NINGUNA</strong></div>
+<div class="editorgrid"><button id="rotLeft">↶ GIRAR</button><button id="rotRight">GIRAR ↷</button><button id="raiseObj">ALTURA +</button><button id="lowerObj">ALTURA −</button><button id="scaleUpObj">TAMAÑO +</button><button id="scaleDownObj">TAMAÑO −</button></div>
+<div class="editorgrid"><button id="deleteObj">ELIMINAR</button><button id="saveLayout">GUARDAR OBJETOS</button><button id="resetLayout">RESTAURAR</button></div>
+</div>
+<small class="editorfoot">Todo se guarda localmente en este navegador. Puedes esculpir montaña, playa y desniveles antes de fijar las posiciones reales.</small>
+</div></div></section></main>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script><script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script><script src="world3d.js"></script></body></html>

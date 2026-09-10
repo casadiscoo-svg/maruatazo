@@ -1,0 +1,17 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Maruatazo — Mapa 2D</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="mapa2d.css"></head>
+<body class="map2d-page">
+<header class="map2d-top"><a href="index.html#cabins" class="map2d-back">← CABAÑAS</a><div><b>MARUATAZO <em>XII</em></b><small>MAPA DE CABAÑAS · MARUATA, MICHOACÁN</small></div><button id="mapHelp" aria-label="Ayuda">?</button></header>
+<main id="mapViewport" class="map2d-viewport" aria-label="Mapa interactivo de cabañas">
+  <div id="mapWorld" class="map2d-world"><img src="assets/maruata-2d-map.png" alt="Mapa ilustrado de la costa de Maruata" draggable="false">
+    <button class="cabin-pin" style="--x:39%;--y:38%" data-name="Cabaña Selva" data-meta="2–4 personas · Entre palmeras" aria-label="Cabaña Selva"><span>⌂</span><b>01</b></button>
+    <button class="cabin-pin" style="--x:47%;--y:42%" data-name="Cabaña Camino" data-meta="2 personas · Cerca del sendero" aria-label="Cabaña Camino"><span>⌂</span><b>02</b></button>
+    <button class="cabin-pin" style="--x:58%;--y:36%" data-name="Cabaña Jardín" data-meta="2–3 personas · Zona verde" aria-label="Cabaña Jardín"><span>⌂</span><b>03</b></button>
+    <button class="cabin-pin" style="--x:67%;--y:31%" data-name="Cabaña Playa" data-meta="2 personas · Cerca del mar" aria-label="Cabaña Playa"><span>⌂</span><b>04</b></button>
+    <button class="landmark-pin" style="--x:63%;--y:57%" data-name="Dedo de Dios" aria-label="Dedo de Dios"><span>◆</span></button>
+    <div class="map-bird bird-a">⌁</div><div class="map-bird bird-b">⌁</div>
+  </div>
+  <div class="map2d-grain"></div>
+  <div class="map2d-instructions" id="mapInstructions">ARRASTRA PARA EXPLORAR · SCROLL / PINCH PARA ZOOM</div>
+  <div class="map2d-controls"><button id="zoomIn" aria-label="Acercar">+</button><button id="zoomOut" aria-label="Alejar">−</button><button id="resetMap" aria-label="Restablecer vista">⌂</button></div>
+  <aside id="cabinCard" class="cabin-card" aria-live="polite"><button class="card-close" id="closeCard">×</button><small>CABAÑA SELECCIONADA</small><h2 id="cabinName">Cabaña</h2><p id="cabinMeta"></p><div class="card-status">DISPONIBILIDAD · POR CONFIRMAR</div><button class="choose-cabin">ELEGIR ESTA CABAÑA →</button></aside>
+</main><script src="mapa2d.js"></script></body></html>
