@@ -1,7 +1,21 @@
 {
- "id": "20261103-0033-79deb6b6",
- "builtAt": "2026-11-03T00:33:33",
- "digest": "79deb6b6",
+ "designTransforms": {
+  "inheritStyles": {
+   "values": 102,
+   "elements": 38,
+   "fields": {
+    "color": 20,
+    "bg": 68,
+    "borderWidth": 4,
+    "borderStyle": 6,
+    "glass": 2,
+    "border": 2
+   }
+  }
+ },
+ "id": "20261103-0128-dd3fc343",
+ "builtAt": "2026-11-03T01:28:16",
+ "digest": "dd3fc343",
  "prefix": "/maruatazo/",
  "designPublishedAt": "2026-11-03T05:45:59.001Z",
  "files": {
@@ -215,7 +229,7 @@
   },
   "index.html": {
    "bytes": 35997,
-   "sha256": "a9763cf0e0072e6c4dc6cb375ee0b33671854b9b16440f1d0be08e5404a7b2da"
+   "sha256": "40705870c4cbe828b3c27557925a67f94aca1b31523d75ab316bd4e9039a1bbd"
   },
   "landing-editor.js": {
    "bytes": 760145,
@@ -231,15 +245,15 @@
   },
   "mapa2d.html": {
    "bytes": 4576,
-   "sha256": "539ea1bcf97492e7b03b8fdeefaaa10b21a0e936911c4201fc8388f839e96ab6"
+   "sha256": "5f0b1b363d175334a7cf732fd97597074907ad13afa0de905cbb8ad898db9aca"
   },
   "mapa2d.js": {
    "bytes": 30368,
    "sha256": "2e06f9f9b36b3a484e961536b3560f32a283f5e6dd8a01da18d248f720cab236"
   },
   "site-design.js": {
-   "bytes": 1222379,
-   "sha256": "c11f47a43d5a465cb6fb488d1ed55a10b8b500219ad5c314f6af73f64cef8a0d"
+   "bytes": 1224195,
+   "sha256": "1b5200b91823b7ade2f0d44476814bef1ce7c3634951c868ff8825e9d22f09bf"
   },
   "style.css": {
    "bytes": 143263,
