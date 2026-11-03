@@ -1,0 +1,249 @@
+{
+ "id": "20261102-2346-d6c4601c",
+ "builtAt": "2026-11-02T23:46:22",
+ "digest": "d6c4601c",
+ "prefix": "/maruatazo/",
+ "designPublishedAt": "2026-11-03T05:45:59.001Z",
+ "files": {
+  ".nojekyll": {
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "404.html": {
+   "bytes": 430,
+   "sha256": "03f044576fbb7546e526ff3d28142ea9fbdf19a0936d7bc3c5a711e8e517d6d5"
+  },
+  "app.js": {
+   "bytes": 6382,
+   "sha256": "af149be90f84db99e837b1af4a2f6d1532316cc2257087466bcd8bc19a9d238c"
+  },
+  "assets/Tropical-Bay-Coastal-Map-web.jpg": {
+   "bytes": 875406,
+   "sha256": "3f998824f5bc15602b70869a76643bc9227f93e25a8e0b92aee6701e7daa5675"
+  },
+  "assets/cabin.jpg": {
+   "bytes": 152748,
+   "sha256": "24bb44f5413a886b5997b970881c5b4aa8eda3d816e5a291c3a1fdc805a9797b"
+  },
+  "assets/coast-1.jpg": {
+   "bytes": 119263,
+   "sha256": "e5890bb5f0884bfd920d0e43dc941c9561d684c13ff5d4bf6fe0e282eefb7008"
+  },
+  "assets/coast-2.jpg": {
+   "bytes": 169609,
+   "sha256": "cd594a30e440ad9ff9c9c60c308ea107b6c8d6f2a2ff2abb87d70877ed4554ff"
+  },
+  "assets/dj.jpg": {
+   "bytes": 226282,
+   "sha256": "26d24d2e3136c9273a18635c3347dea487f3a34fe8f5431fd8ab6d11dbb51047"
+  },
+  "assets/fonts/Cinzel-OFL.txt": {
+   "bytes": 4383,
+   "sha256": "f2b3029aba64c378bf0963b62945eee15e564fe4330b934c8f2eb058282b5e83"
+  },
+  "assets/fonts/Cinzel-Variable.ttf": {
+   "bytes": 125468,
+   "sha256": "f4d83d34d1f6c741193e4acf4b3dff9531e5a67b6aa65228d00a7db72a4e0f34"
+  },
+  "assets/landing/landing-image-1788992811801.webp": {
+   "bytes": 590732,
+   "sha256": "fe84251f0832d6ec51a99583fd0f528d62a0260eeb1aa13e84e92bd5051abfe2"
+  },
+  "assets/landing/landing-image-1788993951435.webp": {
+   "bytes": 152038,
+   "sha256": "b344cda6331984a538e7a327cef4629ed236b897a02bd20f73e29e0cb84d7ef4"
+  },
+  "assets/landing/landing-image-1788995256426.webp": {
+   "bytes": 108820,
+   "sha256": "64a852a9274faf5b0edcbf7067fd7af642984d5af7246055b7575797d4a15b28"
+  },
+  "assets/landing/landing-image-1788997247447.webp": {
+   "bytes": 401664,
+   "sha256": "977931780046960a3c9c5934e935d403529d0a2612d595f8535428cc9cfccb14"
+  },
+  "assets/landing/landing-image-1788999894360.webp": {
+   "bytes": 566874,
+   "sha256": "12a8426464ebeeeb8937f9a0d973c0512eb861359990aa9727858b370a09f8c6"
+  },
+  "assets/landing/manifest.json": {
+   "bytes": 348,
+   "sha256": "8cc6fcad4a520921810363b5fb9c88f8cc5c9f8c8d96e96d6012c7c8a3103f7a"
+  },
+  "assets/map-original.jpg": {
+   "bytes": 228756,
+   "sha256": "f4da2518d8317f6c46c50cee2236776f4889d5b3aa366050b957d88afb4e08ee"
+  },
+  "assets/scenes/coast-golden-00126-1280.jpg": {
+   "bytes": 153054,
+   "sha256": "c2b93c802e9dba037380c08ad70ae9ce844e5f3407e7eb7563af6162af2f7203"
+  },
+  "assets/scenes/coast-golden-00126.jpg": {
+   "bytes": 319649,
+   "sha256": "ac719a8c6ac2a8d033f6e76d70ea797fb51c728f8f8b8aad11bf11f918b55cfa"
+  },
+  "assets/scenes/coast-golden-00462-1280.jpg": {
+   "bytes": 111752,
+   "sha256": "30ffa6111da935ed1e9d0248fda60366b4b25424172c6c9116a1c568706363eb"
+  },
+  "assets/scenes/coast-golden-00462.jpg": {
+   "bytes": 222927,
+   "sha256": "bd7e0eaea7cad69cef759c6309b39c0aaf39734990e1e0c213f772fb294458ad"
+  },
+  "assets/scenes/lighthouse-day-00060-1280.jpg": {
+   "bytes": 157903,
+   "sha256": "0d1b55798d2c0ba535a269d962c129a9ea9282abab8568831da18ad0f311bfde"
+  },
+  "assets/scenes/lighthouse-day-00060.jpg": {
+   "bytes": 313363,
+   "sha256": "2e56ca241473bfde9f558250a397d963ae726e7987e22359d85090407300cae7"
+  },
+  "assets/scenes/play-c01-bus-arrival-golden-232007-2-1280.jpg": {
+   "bytes": 131735,
+   "sha256": "e72494fb2971a77f93bb49c528e64db7bc4caf9cd092ceb3485f44c763f3038a"
+  },
+  "assets/scenes/play-c01-bus-arrival-golden-232007-2.jpg": {
+   "bytes": 249222,
+   "sha256": "127cf092dbb6440b47e85965046007c6820a6c71e6ac3f8bdb7b2ed143f502bc"
+  },
+  "assets/scenes/play-glide3-overlook-013548-3-1280.jpg": {
+   "bytes": 77797,
+   "sha256": "61cc2417ca8157e197c06c6cba7f805a0dea3ed0a1f18429cda476ff17bb7ec8"
+  },
+  "assets/scenes/play-glide3-overlook-013548-3.jpg": {
+   "bytes": 143695,
+   "sha256": "b23dec9a46960e0ffee503562f6d7e919b64400769b2949e390a3a9dc923512c"
+  },
+  "assets/scenes/shot-fireflies-v3-cluster4.jpg": {
+   "bytes": 83344,
+   "sha256": "a603db47906a08c782e35705dbd5a147fddb3f0174141edcf85195095dfdfe30"
+  },
+  "assets/scenes/village-huts-00060-1280.jpg": {
+   "bytes": 196051,
+   "sha256": "c30833a84e3a964820fca352d4dadce29fd0c8c6f20b4aca3fb595c6cfcbe177"
+  },
+  "assets/scenes/village-huts-00060.jpg": {
+   "bytes": 428514,
+   "sha256": "8dae39585119cc52f4434245092c2d0ab2b2e0a74501ba7d9e00af82cf8218f6"
+  },
+  "assets/scenes/waterfall-village-00000.jpg": {
+   "bytes": 303052,
+   "sha256": "33cddfc1020c10041063a1e6bb6cfab9b0b52351d512f3d7454c1f84b663b471"
+  },
+  "assets/scenes/waterfall-village-00068-1280.jpg": {
+   "bytes": 155607,
+   "sha256": "02e8e784c2ac8cdf1fa9b5a3c023e44c09e95a24b29e3fa0af9df8c30ec53579"
+  },
+  "assets/scenes/waterfall-village-00068.jpg": {
+   "bytes": 326579,
+   "sha256": "aec43a1c4373b1b6e04817bd9ef7a1f7da7fc5d73af37acea6dac43ba64d7cc1"
+  },
+  "assets/title/nav-cabins.webp": {
+   "bytes": 15784,
+   "sha256": "02e02b1356b522e58eb0d93982211ded77366187205ca57a1966c6cd3e099a57"
+  },
+  "assets/title/nav-horarios.webp": {
+   "bytes": 15172,
+   "sha256": "245540de505e98927eabc2222406c2f9d8954f9cd0c236f5963c5a73b5edf8b1"
+  },
+  "assets/title/nav-info.webp": {
+   "bytes": 8242,
+   "sha256": "e949b8d83c8d4857588fa2b835961e544269fe23ac9675857663f336580b5608"
+  },
+  "assets/title/nav-lineup.webp": {
+   "bytes": 11974,
+   "sha256": "c2db10b852596eca1dc570dd15f3d32975d1d0d3d3566661c9214cbc158e422e"
+  },
+  "assets/title/nav-logo.webp": {
+   "bytes": 61606,
+   "sha256": "d32871e578d92a6b8e4fafe442a9da7299350299e097dfeddaec74695cec5289"
+  },
+  "assets/title/nav-menu.webp": {
+   "bytes": 10572,
+   "sha256": "b2f9517948bcd6c54aec8349a5e975c0e2f0d98ab3e26a58e08f86e14b3d8c61"
+  },
+  "assets/title/nav-merch.webp": {
+   "bytes": 12084,
+   "sha256": "523fe84ed2ba0c4636f74c51af86a4bfe6e908045c6c48358fe2885c1cbd02cb"
+  },
+  "assets/title/presenta-1600.webp": {
+   "bytes": 107526,
+   "sha256": "1de567b591b9b9b4eedc8db0ba604b57d9d48a5694d33ac67e0c84cc8235e9b1"
+  },
+  "assets/title/presenta-900.webp": {
+   "bytes": 28864,
+   "sha256": "1b53a214592f125499f76129e7d2be105d4fbb4489c69c032a571c2ff5831b6f"
+  },
+  "assets/title/presenta.png": {
+   "bytes": 185457,
+   "sha256": "f5094da820f500bee9bca95eca5252eb0984751af9032a2a6499ff350a3f5616"
+  },
+  "assets/title/title-1600.webp": {
+   "bytes": 277648,
+   "sha256": "a9e23f0745392a09ea4460e2d03867bf0ef193f2a8ad7006a03881b019c89b0b"
+  },
+  "assets/title/title-900.webp": {
+   "bytes": 76484,
+   "sha256": "4e60cf7dcd9316ab6b84f956678417efff17b57902969ac5d0bf579ae7fa050e"
+  },
+  "assets/title/title.png": {
+   "bytes": 792756,
+   "sha256": "ecfe70fa535a05c3c8ccbfd9338557b140c75a44d26909f3e8fa0ab9d94019b2"
+  },
+  "assets/title/xii-cream.png": {
+   "bytes": 54842,
+   "sha256": "b0a464338299466dc361c6c0c21220d86124a8cdc1c104f94baa40efeb35f9c0"
+  },
+  "assets/title/xii-cream.webp": {
+   "bytes": 23136,
+   "sha256": "8e5863dfed7176dd4300e9a0c47928638f3917ebdc1706c50b18163de82dfd27"
+  },
+  "cabins-config.js": {
+   "bytes": 3975,
+   "sha256": "26e6fa29a33a07fef96cd924728d469d8c93b7242dafd04b968425303bdd34ae"
+  },
+  "cinema.css": {
+   "bytes": 77260,
+   "sha256": "bc4fcb73473225ff568f8aabf8f02b189a2562db51669828adb5a4bf93a83c12"
+  },
+  "cinema.js": {
+   "bytes": 12021,
+   "sha256": "3d9cf98bdf956642edd28874d169c38d08f817b925a07568160fd6c31ff048d4"
+  },
+  "image-library.js": {
+   "bytes": 49575,
+   "sha256": "0c15fe7ae9de9c8d58fc6aaf8d9e98ba4796f78cf1b3e01ae20c26e61ed3eb2f"
+  },
+  "index.html": {
+   "bytes": 35997,
+   "sha256": "bbcb001eecddb16a8c06294259bbaba2dc23426c5c3e4ae0eb8d4b75830688ea"
+  },
+  "landing-editor.js": {
+   "bytes": 760145,
+   "sha256": "89b489bbf688958b1ddbf5e5a90c6e40369b6553b11284c0a1120d54c1fb0664"
+  },
+  "lineup-data.js": {
+   "bytes": 1802,
+   "sha256": "201fe7da1ae7f1e73d10a568f2ddcdd4acdf0d69356574d47aa5e056d4e86dd2"
+  },
+  "mapa2d.css": {
+   "bytes": 22158,
+   "sha256": "de705894fc326796b688df547357583216992b13f262b49b3189210f58ae7308"
+  },
+  "mapa2d.html": {
+   "bytes": 4576,
+   "sha256": "6539bc5487fbdb85f86827777314dc8e9e1058a99c8150790535ef3492eafdc8"
+  },
+  "mapa2d.js": {
+   "bytes": 30368,
+   "sha256": "2e06f9f9b36b3a484e961536b3560f32a283f5e6dd8a01da18d248f720cab236"
+  },
+  "site-design.js": {
+   "bytes": 1222379,
+   "sha256": "c11f47a43d5a465cb6fb488d1ed55a10b8b500219ad5c314f6af73f64cef8a0d"
+  },
+  "style.css": {
+   "bytes": 143263,
+   "sha256": "1b34c740de091aebcfb487113f035b3ed543b8141b63d5639da712181b9ea57c"
+  }
+ }
+}

@@ -1,0 +1,36 @@
+<!doctype html><html lang="es"><head><script>window.MARUATAZO_PUBLIC_RELEASE=true;</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#060c14"><link rel="preload" href="assets/fonts/Cinzel-Variable.ttf" as="font" type="font/ttf" crossorigin><title>Maruatazo XII — Mapa de cabañas</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23e65312'/%3E%3Cpath d='M12 12h40v40H12z' fill='%23eee3c6'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia' font-size='25' font-weight='bold' fill='%23171711'%3EXII%3C/text%3E%3C/svg%3E"><meta name="description" content="Explora el alojamiento de Maruatazo XII (13–16 de noviembre de 2026) en Centro Ecoturístico Ayutl, Maruata, Michoacán y consulta por WhatsApp."><link rel="stylesheet" href="style.css?v=d6c4601c"><link rel="stylesheet" href="mapa2d.css?v=d6c4601c"></head>
+<body class="map2d-page">
+<header class="map2d-top"><a href="index.html#cabins" class="map2d-back">← CABAÑAS</a><div><a class="map2d-brand" href="index.html" aria-label="Maruatazo XII — ir al inicio"><img alt="" decoding="async" height="106" src="assets/title/nav-logo.webp" width="772"></a><small>CENTRO ECOTURÍSTICO AYUTL · MARUATA, MICHOACÁN</small></div><button id="mapHelp" type="button" aria-label="Ayuda del mapa" aria-controls="mapInstructions">?</button></header>
+<div class="cabin-app">
+  <main id="mapViewport" class="map2d-viewport" tabindex="0" aria-label="Mapa interactivo de cabañas. Flechas para mover, más y menos para acercar, cero para restablecer.">
+    <div id="mapWorld" class="map2d-world"></div>
+    <div class="map2d-grain" aria-hidden="true"></div>
+    <div class="map2d-instructions" id="mapInstructions">ARRASTRA PARA EXPLORAR · PELLIZCA O USA + / − PARA ZOOM</div>
+    <div class="map2d-controls"><button id="zoomIn" type="button" aria-label="Acercar">+</button><button id="zoomOut" type="button" aria-label="Alejar">−</button><button id="resetMap" type="button" aria-label="Restablecer vista">⌂</button></div>
+    <button id="editToggle" class="edit-toggle" type="button" aria-pressed="false" hidden>EDITAR CABAÑAS</button>
+    <div id="editBanner" class="edit-banner" hidden>MODO EDICIÓN · solo visible para ti · borrador guardado en este navegador</div>
+    <output id="calibrate" class="map2d-calibrate" hidden></output>
+  </main>
+  <aside id="cabinPanel" class="cabin-panel" aria-label="Cabañas">
+    <button id="panelToggle" class="panel-toggle" type="button" aria-expanded="false" aria-controls="panelBody"><span id="panelToggleLabel">CABAÑAS</span><i aria-hidden="true">▴</i></button>
+    <div id="panelBody" class="panel-body">
+      <section id="panelList" aria-labelledby="listTitle">
+        <small>PRECIO POR PERSONA · 3 NOCHES + EVENTO</small><h2 id="listTitle">ELIGE TU ALOJAMIENTO</h2><p class="panel-dates" id="panelDates"></p>
+        <div id="editTools" class="edit-tools" hidden>
+          <b id="editCount"></b>
+          <div class="edit-tools-row"><button id="exportCfg" class="ed-btn" type="button">EXPORTAR CONFIG</button><button id="importCfg" class="ed-btn" type="button">IMPORTAR CONFIG</button></div>
+          <button id="discardDraft" class="ed-btn ghost" type="button">DESCARTAR BORRADOR</button>
+          <input id="importFile" type="file" accept="application/json,.json" hidden>
+          <ol class="edit-steps"><li>Toca el mapa para agregar una cabaña.</li><li>Arrástrala o usa las flechas del teclado para ajustarla.</li><li>Completa sus datos y exporta.</li></ol>
+        </div>
+        <p class="panel-intro" id="panelIntro"></p>
+        <p class="panel-notice" id="panelNotice" hidden></p><p class="panel-reco" id="panelReco"></p>
+        <ul id="cabinList" class="cabin-list"></ul>
+        <div class="legend" aria-label="Leyenda de disponibilidad"><b>DISPONIBILIDAD</b><ul id="legend"></ul></div>
+        <p class="fineprint">Precios oficiales 2026 en MXN por persona; cada uno cubre 3 noches y acceso al evento los 3 días. Solicitar no aparta la cabaña: la reserva se confirma por WhatsApp. El mapa es una ilustración artística de la bahía, no un mapa georreferenciado ni a escala.</p>
+      </section>
+      <section id="cabinDetail" class="cabin-card" aria-labelledby="cabinName" hidden></section>
+    </div>
+  </aside>
+</div>
+<script src="cabins-config.js?v=d6c4601c"></script><script src="mapa2d.js?v=d6c4601c"></script></body></html>
