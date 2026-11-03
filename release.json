@@ -1,7 +1,7 @@
 {
- "id": "20261102-2346-d6c4601c",
- "builtAt": "2026-11-02T23:46:22",
- "digest": "d6c4601c",
+ "id": "20261103-0033-79deb6b6",
+ "builtAt": "2026-11-03T00:33:33",
+ "digest": "79deb6b6",
  "prefix": "/maruatazo/",
  "designPublishedAt": "2026-11-03T05:45:59.001Z",
  "files": {
@@ -202,12 +202,12 @@
    "sha256": "26e6fa29a33a07fef96cd924728d469d8c93b7242dafd04b968425303bdd34ae"
   },
   "cinema.css": {
-   "bytes": 77260,
-   "sha256": "bc4fcb73473225ff568f8aabf8f02b189a2562db51669828adb5a4bf93a83c12"
+   "bytes": 93200,
+   "sha256": "9be31a7fde531a0c52c20e13cb5bb278fd7275629de860ffd41fb302de6f44ce"
   },
   "cinema.js": {
-   "bytes": 12021,
-   "sha256": "3d9cf98bdf956642edd28874d169c38d08f817b925a07568160fd6c31ff048d4"
+   "bytes": 12507,
+   "sha256": "c64970abcb3c3336a3bb9c3d8db1f7155cc95bf0b298a2435e6e6728b300d7b1"
   },
   "image-library.js": {
    "bytes": 49575,
@@ -215,7 +215,7 @@
   },
   "index.html": {
    "bytes": 35997,
-   "sha256": "bbcb001eecddb16a8c06294259bbaba2dc23426c5c3e4ae0eb8d4b75830688ea"
+   "sha256": "a9763cf0e0072e6c4dc6cb375ee0b33671854b9b16440f1d0be08e5404a7b2da"
   },
   "landing-editor.js": {
    "bytes": 760145,
@@ -231,7 +231,7 @@
   },
   "mapa2d.html": {
    "bytes": 4576,
-   "sha256": "6539bc5487fbdb85f86827777314dc8e9e1058a99c8150790535ef3492eafdc8"
+   "sha256": "539ea1bcf97492e7b03b8fdeefaaa10b21a0e936911c4201fc8388f839e96ab6"
   },
   "mapa2d.js": {
    "bytes": 30368,

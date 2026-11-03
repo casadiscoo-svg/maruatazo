@@ -287,7 +287,7 @@ body.cinema:not(.cin-x) #lineup .artist-list{display:grid!important;grid-templat
 body.cinema:not(.cin-x) #lineup .artist-list span{display:flex!important;align-items:center;min-height:52px;padding:12px 16px!important;border:1px dashed rgba(243,232,205,.38)!important;border-left:3px solid #e8b551!important;border-radius:10px!important;background:rgba(8,22,34,.66)!important;color:#f3e8cd!important;
   font:700 15px/1.25 var(--c-serif)!important;letter-spacing:.1em!important;text-transform:uppercase;font-style:normal!important;overflow-wrap:anywhere;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 body.cinema:not(.cin-x) #lineup .print-photo{max-width:320px;margin:0!important}
-@media (max-width:900px){body.cinema:not(.landing-editing) #lineup .lineup-layout{grid-template-columns:1fr}body.cinema:not(.landing-editing) #lineup .print-photo{max-width:min(100%,360px)}}/* edit-mode canvas preview: tablet */body.cinema.landing-editing[data-le-preview="tablet"] #lineup .lineup-layout{grid-template-columns:1fr}body.cinema.landing-editing[data-le-preview="tablet"] #lineup .print-photo{max-width:min(100%,360px)}/* edit-mode canvas preview: mobile */body.cinema.landing-editing[data-le-preview="mobile"] #lineup .lineup-layout{grid-template-columns:1fr}body.cinema.landing-editing[data-le-preview="mobile"] #lineup .print-photo{max-width:min(100%,360px)}
+@media (max-width:900px){body.cinema:not(.landing-editing) #lineup .lineup-layout{grid-template-columns:minmax(0,1fr)}body.cinema:not(.landing-editing) #lineup .print-photo{max-width:min(100%,360px)}}/* edit-mode canvas preview: tablet */body.cinema.landing-editing[data-le-preview="tablet"] #lineup .lineup-layout{grid-template-columns:minmax(0,1fr)}body.cinema.landing-editing[data-le-preview="tablet"] #lineup .print-photo{max-width:min(100%,360px)}/* edit-mode canvas preview: mobile */body.cinema.landing-editing[data-le-preview="mobile"] #lineup .lineup-layout{grid-template-columns:minmax(0,1fr)}body.cinema.landing-editing[data-le-preview="mobile"] #lineup .print-photo{max-width:min(100%,360px)}
 /* data-driven timetable */
 body.cinema:not(.cin-x) #lineup .lineup-timetable{order:3;display:block}
 body.cinema:not(.cin-x) #lineup .lineup-timetable[hidden]{display:none}
@@ -299,7 +299,7 @@ body.cinema:not(.cin-x) .lt-act{display:grid;grid-template-columns:minmax(7.5ch,
 body.cinema:not(.cin-x) .lt-time{font:700 14px/1.3 var(--c-serif);letter-spacing:.08em;color:#e8b551;white-space:nowrap}
 body.cinema:not(.cin-x) .lt-name{font:700 clamp(18px,calc(2 * var(--vw)),24px)/1.2 var(--c-serif);letter-spacing:.05em;text-transform:uppercase;color:#f3e8cd;overflow-wrap:anywhere}
 body.cinema:not(.cin-x) .lt-stage{font:700 12px/1.2 var(--c-ui);letter-spacing:.14em;text-transform:uppercase;color:#e6dabb;padding:5px 10px;border:1px solid rgba(232,181,81,.4);border-radius:999px;white-space:nowrap}
-@media (max-width:640px){body.cinema:not(.landing-editing) .lt-act{grid-template-columns:1fr;gap:4px}body.cinema:not(.landing-editing) .lt-stage{justify-self:start}}/* edit-mode canvas preview: mobile */body.cinema.landing-editing[data-le-preview="mobile"] .lt-act{grid-template-columns:1fr;gap:4px}body.cinema.landing-editing[data-le-preview="mobile"] .lt-stage{justify-self:start}
+@media (max-width:640px){body.cinema:not(.landing-editing) .lt-act{grid-template-columns:minmax(0,1fr);gap:4px}body.cinema:not(.landing-editing) .lt-stage{justify-self:start}}/* edit-mode canvas preview: mobile */body.cinema.landing-editing[data-le-preview="mobile"] .lt-act{grid-template-columns:minmax(0,1fr);gap:4px}body.cinema.landing-editing[data-le-preview="mobile"] .lt-stage{justify-self:start}
 
 /* ---- INFO — DAY (lighthouse), fixed backdrop that the content scrolls over ---- */
 body.cinema:not(.cin-x) #info{--sec-bg:linear-gradient(180deg,#060c14 0,rgba(6,12,20,0) 90px),linear-gradient(0deg,#060c14 0,rgba(6,12,20,0) 90px),linear-gradient(0deg,rgba(6,12,20,calc(.72*var(--dk-s,1))) 0,rgba(6,12,20,0) 360px),rgba(6,16,26,calc(.1*var(--dk-s,1)));
@@ -374,17 +374,17 @@ body.cinema:not(.cin-x) #info .info-cinema .ic-body{background:none!important;bo
 
 /* responsive + reduced motion for the section scenes */
 @media (max-width:1023px){
-  body.cinema:not(.landing-editing) .info-cinema{grid-template-columns:1fr}
+  body.cinema:not(.landing-editing) .info-cinema{grid-template-columns:minmax(0,1fr)}
   body.cinema:not(.landing-editing) .info-intro{max-width:560px}
   body.cinema:not(.landing-editing) .ic-body{padding-left:22px}
   body.cinema:not(.landing-editing) .sec-scene--day::after{background:linear-gradient(180deg,rgba(6,16,26,calc(.5*var(--dk-s,1))) 0%,rgba(6,16,26,calc(.42*var(--dk-s,1))) 100%)}
 }/* edit-mode canvas preview: tablet */
-  body.cinema.landing-editing[data-le-preview="tablet"] .info-cinema{grid-template-columns:1fr}
+  body.cinema.landing-editing[data-le-preview="tablet"] .info-cinema{grid-template-columns:minmax(0,1fr)}
   body.cinema.landing-editing[data-le-preview="tablet"] .info-intro{max-width:560px}
   body.cinema.landing-editing[data-le-preview="tablet"] .ic-body{padding-left:22px}
   body.cinema.landing-editing[data-le-preview="tablet"] .sec-scene--day::after{background:linear-gradient(180deg,rgba(6,16,26,calc(.5*var(--dk-s,1))) 0%,rgba(6,16,26,calc(.42*var(--dk-s,1))) 100%)}
 /* edit-mode canvas preview: mobile */
-  body.cinema.landing-editing[data-le-preview="mobile"] .info-cinema{grid-template-columns:1fr}
+  body.cinema.landing-editing[data-le-preview="mobile"] .info-cinema{grid-template-columns:minmax(0,1fr)}
   body.cinema.landing-editing[data-le-preview="mobile"] .info-intro{max-width:560px}
   body.cinema.landing-editing[data-le-preview="mobile"] .ic-body{padding-left:22px}
   body.cinema.landing-editing[data-le-preview="mobile"] .sec-scene--day::after{background:linear-gradient(180deg,rgba(6,16,26,calc(.5*var(--dk-s,1))) 0%,rgba(6,16,26,calc(.42*var(--dk-s,1))) 100%)}
@@ -508,34 +508,34 @@ body.cinema:not(.cin-x) #closing .closing-links p{flex-basis:100%;margin:10px 0 
 
 /* ============================== RESPONSIVE ============================== */
 @media (max-width:1023px){
-  body.cinema:not(.landing-editing) .info-cinema{grid-template-columns:1fr}
+  body.cinema:not(.landing-editing) .info-cinema{grid-template-columns:minmax(0,1fr)}
   body.cinema:not(.landing-editing) .ic-body{padding-left:22px}
 }/* edit-mode canvas preview: tablet */
-  body.cinema.landing-editing[data-le-preview="tablet"] .info-cinema{grid-template-columns:1fr}
+  body.cinema.landing-editing[data-le-preview="tablet"] .info-cinema{grid-template-columns:minmax(0,1fr)}
   body.cinema.landing-editing[data-le-preview="tablet"] .ic-body{padding-left:22px}
 /* edit-mode canvas preview: mobile */
-  body.cinema.landing-editing[data-le-preview="mobile"] .info-cinema{grid-template-columns:1fr}
+  body.cinema.landing-editing[data-le-preview="mobile"] .info-cinema{grid-template-columns:minmax(0,1fr)}
   body.cinema.landing-editing[data-le-preview="mobile"] .ic-body{padding-left:22px}
 
 @media (max-width:900px){
-  body.cinema:not(.landing-editing) #cabins .cabins-layout,body.cinema:not(.landing-editing) #menu .menu-layout,body.cinema:not(.landing-editing) #lineup .section-inner{grid-template-columns:1fr!important}
-  body.cinema:not(.landing-editing) main>section.section .section-title-row{grid-template-columns:1fr!important}
-  body.cinema:not(.landing-editing) #boletos .cards{grid-template-columns:1fr}
-  body.cinema:not(.landing-editing) #boletos .ticket-notices{grid-template-columns:1fr}
+  body.cinema:not(.landing-editing) #cabins .cabins-layout,body.cinema:not(.landing-editing) #menu .menu-layout,body.cinema:not(.landing-editing) #lineup .section-inner{grid-template-columns:minmax(0,1fr)!important}
+  body.cinema:not(.landing-editing) main>section.section .section-title-row{grid-template-columns:minmax(0,1fr)!important}
+  body.cinema:not(.landing-editing) #boletos .cards{grid-template-columns:minmax(0,1fr)}
+  body.cinema:not(.landing-editing) #boletos .ticket-notices{grid-template-columns:minmax(0,1fr)}
   body.cinema:not(.landing-editing) #boletos .cards button{min-height:0}
   body.cinema:not(.landing-editing) #lineup .print-photo img,body.cinema:not(.landing-editing) #cabins .print-photo img,body.cinema:not(.landing-editing) #menu .menu-photo img{aspect-ratio:4/3}
 }/* edit-mode canvas preview: tablet */
-  body.cinema.landing-editing[data-le-preview="tablet"] #cabins .cabins-layout,body.cinema.landing-editing[data-le-preview="tablet"] #menu .menu-layout,body.cinema.landing-editing[data-le-preview="tablet"] #lineup .section-inner{grid-template-columns:1fr!important}
-  body.cinema.landing-editing[data-le-preview="tablet"] main>section.section .section-title-row{grid-template-columns:1fr!important}
-  body.cinema.landing-editing[data-le-preview="tablet"] #boletos .cards{grid-template-columns:1fr}
-  body.cinema.landing-editing[data-le-preview="tablet"] #boletos .ticket-notices{grid-template-columns:1fr}
+  body.cinema.landing-editing[data-le-preview="tablet"] #cabins .cabins-layout,body.cinema.landing-editing[data-le-preview="tablet"] #menu .menu-layout,body.cinema.landing-editing[data-le-preview="tablet"] #lineup .section-inner{grid-template-columns:minmax(0,1fr)!important}
+  body.cinema.landing-editing[data-le-preview="tablet"] main>section.section .section-title-row{grid-template-columns:minmax(0,1fr)!important}
+  body.cinema.landing-editing[data-le-preview="tablet"] #boletos .cards{grid-template-columns:minmax(0,1fr)}
+  body.cinema.landing-editing[data-le-preview="tablet"] #boletos .ticket-notices{grid-template-columns:minmax(0,1fr)}
   body.cinema.landing-editing[data-le-preview="tablet"] #boletos .cards button{min-height:0}
   body.cinema.landing-editing[data-le-preview="tablet"] #lineup .print-photo img,body.cinema.landing-editing[data-le-preview="tablet"] #cabins .print-photo img,body.cinema.landing-editing[data-le-preview="tablet"] #menu .menu-photo img{aspect-ratio:4/3}
 /* edit-mode canvas preview: mobile */
-  body.cinema.landing-editing[data-le-preview="mobile"] #cabins .cabins-layout,body.cinema.landing-editing[data-le-preview="mobile"] #menu .menu-layout,body.cinema.landing-editing[data-le-preview="mobile"] #lineup .section-inner{grid-template-columns:1fr!important}
-  body.cinema.landing-editing[data-le-preview="mobile"] main>section.section .section-title-row{grid-template-columns:1fr!important}
-  body.cinema.landing-editing[data-le-preview="mobile"] #boletos .cards{grid-template-columns:1fr}
-  body.cinema.landing-editing[data-le-preview="mobile"] #boletos .ticket-notices{grid-template-columns:1fr}
+  body.cinema.landing-editing[data-le-preview="mobile"] #cabins .cabins-layout,body.cinema.landing-editing[data-le-preview="mobile"] #menu .menu-layout,body.cinema.landing-editing[data-le-preview="mobile"] #lineup .section-inner{grid-template-columns:minmax(0,1fr)!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] main>section.section .section-title-row{grid-template-columns:minmax(0,1fr)!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] #boletos .cards{grid-template-columns:minmax(0,1fr)}
+  body.cinema.landing-editing[data-le-preview="mobile"] #boletos .ticket-notices{grid-template-columns:minmax(0,1fr)}
   body.cinema.landing-editing[data-le-preview="mobile"] #boletos .cards button{min-height:0}
   body.cinema.landing-editing[data-le-preview="mobile"] #lineup .print-photo img,body.cinema.landing-editing[data-le-preview="mobile"] #cabins .print-photo img,body.cinema.landing-editing[data-le-preview="mobile"] #menu .menu-photo img{aspect-ratio:4/3}
 
@@ -564,7 +564,135 @@ body.cinema:not(.cin-x) #closing .closing-links p{flex-basis:100%;margin:10px 0 
 }
 /* V30 style.css (<=760px) sets #info order:1, #cabins:2, #menu:3, #lineup:4, #boletos:5 and hides #merch: restore the DOM order and show every section */
 @media (max-width:760px){body.cinema:not(.landing-editing) :is(#lineup,#info,#cabins,#menu,#boletos,#closing){order:0!important}body.cinema:not(.landing-editing) #merch{display:block!important}}/* edit-mode canvas preview: mobile */body.cinema.landing-editing[data-le-preview="mobile"] :is(#lineup,#info,#cabins,#menu,#boletos,#closing){order:0!important}body.cinema.landing-editing[data-le-preview="mobile"] #merch{display:block!important}
+/* =====================================================================================================================
+   MOBILE ART DIRECTION (phones, <=767px) — same world, same artwork, composed for a portrait screen.
+   Responsive layer only: nothing here edits the owner's saved V30 state or the desktop rules. Every block is inside a media query, so
+   build_cinema.py mirrors it into the editor's mobile canvas preview (public = editor).
+   ===================================================================================================================== */
+/* grid children must be allowed to shrink (second half of the INFO overflow root cause) */
+body.cinema:not(.cin-x) .info-cinema>*,body.cinema:not(.cin-x) .info-groups>*,body.cinema:not(.cin-x) .info-group>*{min-width:0}
+/* the same sentence is saved into both info-lede and info-note in the old mobile state; cinema.js marks the repeat and it is not shown twice */
+body.cinema:not(.cin-x) [data-cin-dup]{display:none!important}
+/* tablet + phone: images the owner added to a section keep the DESKTOP stacking (z-index 0 = behind the scene backdrop, invisible on desktop).
+   Their saved tablet/phone state is an old insertion-time box at z-index 20, which floated a framed picture over the INFO cards */
+@media (max-width:1023px){body.cinema:not(.landing-editing) main>section.section img.le-added{z-index:0!important}}/* edit-mode canvas preview: tablet */body.cinema.landing-editing[data-le-preview="tablet"] main>section.section img.le-added{z-index:0!important}/* edit-mode canvas preview: mobile */body.cinema.landing-editing[data-le-preview="mobile"] main>section.section img.le-added{z-index:0!important}
 
+@media (max-width:767px){
+  /* ---- anchors: one offset (header height), not two: the root scroll-padding is set below, outside the mirrored region ---- */
+  body.cinema:not(.landing-editing) main>section.section{scroll-margin-top:0!important;padding:44px var(--c-gut) 56px!important}
+  body.cinema:not(.landing-editing) main>section.section h2,body.cinema:not(.landing-editing) #boletos h2{font-size:clamp(38px,calc(11.5 * var(--vw)),52px)!important;line-height:.95!important}
+  body.cinema:not(.landing-editing) main>section.section .section-title-row{margin-bottom:22px!important}
+  body.cinema:not(.landing-editing) main>section.section .section-intro{font-size:17px!important;line-height:1.55!important}
+
+  /* ---- navigation: ONE clean nav. Logo + hamburger (the artwork menu) + the BOLETOS action from the desktop header; the 65px bottom bar duplicated it ---- */
+  body.cinema:not(.landing-editing) .bottom{display:none!important}
+  body.cinema:not(.landing-editing) main{padding-bottom:0!important}
+  body.cinema:not(.landing-editing) .top{display:flex!important;align-items:center}
+  body.cinema:not(.landing-editing) .top .nav-toggle{order:3}body.cinema:not(.landing-editing) .top .ticket.mini{order:2}body.cinema:not(.landing-editing) .top .brand{order:1}
+  body.cinema:not(.landing-editing) .top .ticket.mini{display:inline-flex!important;align-items:center;justify-content:center;margin:0 4px 0 auto!important;min-height:40px;padding:0 14px!important;
+    font:700 11px/1 var(--c-serif)!important;letter-spacing:.14em!important;white-space:nowrap}
+  body.cinema:not(.landing-editing) .site-nav a{height:58px}
+  body.cinema:not(.landing-editing) .top .brand{padding:12px 0!important;min-height:44px;box-sizing:content-box}   /* 44px touch target, same visual size */
+
+  /* ---- LANDING: a portrait poster. Lockup on the sky, lighthouse in the middle of the frame, date / phrase / CTA below it ---- */
+  body.cinema:not(.landing-editing) .cin-img{--mx:58%;--my:50%}                                  /* same image, framed on the lighthouse (inline owner crops still win) */
+  body.cinema:not(.landing-editing) .cin-img.is-active{animation:none}                           /* no continuous drift on phones: battery + no sub-pixel shimmer on the art */
+  body.cinema:not(.landing-editing) .cinema-hero{justify-content:flex-start;min-height:max(100svh,660px);padding:calc(58px + 20px) var(--c-gut) calc(54px + env(safe-area-inset-bottom))}
+  body.cinema:not(.landing-editing) .cin-copy{display:flex;flex-direction:column;flex:1 1 auto;--lw:100%}
+  body.cinema:not(.landing-editing) .cin-presents{width:92%;margin:0 auto 4px}
+  body.cinema:not(.landing-editing) .cin-title{position:relative;width:100%}
+  body.cinema:not(.landing-editing) .cin-title-art{width:86%}
+  body.cinema:not(.landing-editing) .cin-xii-art{position:absolute;left:85.5%;top:-12%;width:15%;margin:0}
+  body.cinema:not(.landing-editing) .cin-when{margin-top:auto!important;padding-top:24px;gap:10px 12px}
+  body.cinema:not(.landing-editing) .cin-when time{font-size:14px;padding:9px 16px 8px}
+  body.cinema:not(.landing-editing) .cin-where{font-size:11px;white-space:normal}
+  body.cinema:not(.landing-editing) .cin-tag{font-size:25px;margin-top:14px}
+  body.cinema:not(.landing-editing) .cin-actions{margin-top:16px}
+  body.cinema:not(.landing-editing) .cin-credit{bottom:16px}
+  body.cinema:not(.landing-editing) .cin-scene::after{background:
+    linear-gradient(180deg,rgba(6,12,20,.55) 0%,rgba(6,12,20,.14) 18%,rgba(6,12,20,0) 32%),
+    linear-gradient(180deg,rgba(6,12,20,0) 54%,rgba(6,12,20,calc(var(--s)*.75)) 82%,rgba(6,12,20,calc(var(--s)*1.1)) 100%),
+    linear-gradient(0deg,#060c14 0%,rgba(6,12,20,0) 70px)}
+
+  /* ---- INFO: readable, never wider than the screen ---- */
+  /* geometry saved for the phone breakpoint (a fixed width/height captured in a wider preview, e.g. the 425x222px intro panel) must never be wider than the screen nor clip wrapped text; colors, offsets and everything else saved stay */
+  body.cinema:not(.landing-editing) main>section.section .le-editable[style*="width"]:not(img){max-width:100%!important;box-sizing:border-box}
+  body.cinema:not(.landing-editing) #info .info-intro{height:auto!important}
+  body.cinema:not(.landing-editing) #info .info-intro .kicker{font:600 13px/1.5 var(--c-ui)!important;letter-spacing:.03em!important;text-transform:none!important;opacity:.95}
+  body.cinema:not(.landing-editing) #info .info-lede,body.cinema:not(.landing-editing) #info .info-note{font-size:16.5px!important;line-height:1.55!important}
+  body.cinema:not(.landing-editing) #info .info-cinema details.info-card>summary{padding:14px 14px!important}
+  body.cinema:not(.landing-editing) #info .ic-body,body.cinema:not(.landing-editing) #info .ic-body p{font-size:16px!important;line-height:1.6!important}
+
+  /* ---- HORARIOS: editorial program. Tabs in one row, placeholders as quiet program lines (not a grid of narrow cards) ---- */
+  body.cinema:not(.landing-editing) #lineup .tabs{flex-wrap:nowrap!important;gap:8px!important;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1*var(--c-gut))!important;padding-inline:var(--c-gut)!important}
+  body.cinema:not(.landing-editing) #lineup .tabs::-webkit-scrollbar{display:none}
+  body.cinema:not(.landing-editing) :is(#lineup .tabs button,.lt-tab){flex:none;white-space:nowrap;padding:0 16px!important;font-size:12px!important;letter-spacing:.1em!important}
+  body.cinema:not(.landing-editing) #lineup .artist-list{grid-template-columns:minmax(0,1fr)!important;gap:0!important}
+  body.cinema:not(.landing-editing) #lineup .artist-list span{display:flex!important;align-items:center;min-height:50px;padding:0 4px 0 14px!important;border:0!important;border-left:2px solid rgba(232,181,81,.55)!important;border-bottom:1px solid rgba(243,232,205,.12)!important;border-radius:0!important;background:none!important;box-shadow:none!important;font-size:15px!important;letter-spacing:.16em!important;opacity:.8}
+  body.cinema:not(.landing-editing) .lt-act{padding:14px 0!important;border-bottom:1px solid rgba(243,232,205,.16)}
+  body.cinema:not(.landing-editing) .lt-time{font:700 13px/1.2 var(--c-serif)!important;letter-spacing:.16em!important;color:#e8b551!important}
+  body.cinema:not(.landing-editing) .lt-name{font:700 21px/1.2 var(--c-serif)!important;letter-spacing:.04em!important}
+  body.cinema:not(.landing-editing) .lt-stage{font-size:12px!important;opacity:.8}
+}/* edit-mode canvas preview: mobile */
+  /* ---- anchors: one offset (header height), not two: the root scroll-padding is set below, outside the mirrored region ---- */
+  body.cinema.landing-editing[data-le-preview="mobile"] main>section.section{scroll-margin-top:0!important;padding:44px var(--c-gut) 56px!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] main>section.section h2,body.cinema.landing-editing[data-le-preview="mobile"] #boletos h2{font-size:clamp(38px,calc(11.5 * var(--vw)),52px)!important;line-height:.95!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] main>section.section .section-title-row{margin-bottom:22px!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] main>section.section .section-intro{font-size:17px!important;line-height:1.55!important}
+
+  /* ---- navigation: ONE clean nav. Logo + hamburger (the artwork menu) + the BOLETOS action from the desktop header; the 65px bottom bar duplicated it ---- */
+  body.cinema.landing-editing[data-le-preview="mobile"] .bottom{display:none!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] main{padding-bottom:0!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] .top{display:flex!important;align-items:center}
+  body.cinema.landing-editing[data-le-preview="mobile"] .top .nav-toggle{order:3}body.cinema.landing-editing[data-le-preview="mobile"] .top .ticket.mini{order:2}body.cinema.landing-editing[data-le-preview="mobile"] .top .brand{order:1}
+  body.cinema.landing-editing[data-le-preview="mobile"] .top .ticket.mini{display:inline-flex!important;align-items:center;justify-content:center;margin:0 4px 0 auto!important;min-height:40px;padding:0 14px!important;
+    font:700 11px/1 var(--c-serif)!important;letter-spacing:.14em!important;white-space:nowrap}
+  body.cinema.landing-editing[data-le-preview="mobile"] .site-nav a{height:58px}
+  body.cinema.landing-editing[data-le-preview="mobile"] .top .brand{padding:12px 0!important;min-height:44px;box-sizing:content-box}   /* 44px touch target, same visual size */
+
+  /* ---- LANDING: a portrait poster. Lockup on the sky, lighthouse in the middle of the frame, date / phrase / CTA below it ---- */
+  body.cinema.landing-editing[data-le-preview="mobile"] .cin-img{--mx:58%;--my:50%}                                  /* same image, framed on the lighthouse (inline owner crops still win) */
+  body.cinema.landing-editing[data-le-preview="mobile"] .cin-img.is-active{animation:none}                           /* no continuous drift on phones: battery + no sub-pixel shimmer on the art */
+  body.cinema.landing-editing[data-le-preview="mobile"] .cinema-hero{justify-content:flex-start;min-height:max(100svh,660px);padding:calc(58px + 20px) var(--c-gut) calc(54px + env(safe-area-inset-bottom))}
+  body.cinema.landing-editing[data-le-preview="mobile"] .cin-copy{display:flex;flex-direction:column;flex:1 1 auto;--lw:100%}
+  body.cinema.landing-editing[data-le-preview="mobile"] .cin-presents{width:92%;margin:0 auto 4px}
+  body.cinema.landing-editing[data-le-preview="mobile"] .cin-title{position:relative;width:100%}
+  body.cinema.landing-editing[data-le-preview="mobile"] .cin-title-art{width:86%}
+  body.cinema.landing-editing[data-le-preview="mobile"] .cin-xii-art{position:absolute;left:85.5%;top:-12%;width:15%;margin:0}
+  body.cinema.landing-editing[data-le-preview="mobile"] .cin-when{margin-top:auto!important;padding-top:24px;gap:10px 12px}
+  body.cinema.landing-editing[data-le-preview="mobile"] .cin-when time{font-size:14px;padding:9px 16px 8px}
+  body.cinema.landing-editing[data-le-preview="mobile"] .cin-where{font-size:11px;white-space:normal}
+  body.cinema.landing-editing[data-le-preview="mobile"] .cin-tag{font-size:25px;margin-top:14px}
+  body.cinema.landing-editing[data-le-preview="mobile"] .cin-actions{margin-top:16px}
+  body.cinema.landing-editing[data-le-preview="mobile"] .cin-credit{bottom:16px}
+  body.cinema.landing-editing[data-le-preview="mobile"] .cin-scene::after{background:
+    linear-gradient(180deg,rgba(6,12,20,.55) 0%,rgba(6,12,20,.14) 18%,rgba(6,12,20,0) 32%),
+    linear-gradient(180deg,rgba(6,12,20,0) 54%,rgba(6,12,20,calc(var(--s)*.75)) 82%,rgba(6,12,20,calc(var(--s)*1.1)) 100%),
+    linear-gradient(0deg,#060c14 0%,rgba(6,12,20,0) 70px)}
+
+  /* ---- INFO: readable, never wider than the screen ---- */
+  /* geometry saved for the phone breakpoint (a fixed width/height captured in a wider preview, e.g. the 425x222px intro panel) must never be wider than the screen nor clip wrapped text; colors, offsets and everything else saved stay */
+  body.cinema.landing-editing[data-le-preview="mobile"] main>section.section .le-editable[style*="width"]:not(img){max-width:100%!important;box-sizing:border-box}
+  body.cinema.landing-editing[data-le-preview="mobile"] #info .info-intro{height:auto!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] #info .info-intro .kicker{font:600 13px/1.5 var(--c-ui)!important;letter-spacing:.03em!important;text-transform:none!important;opacity:.95}
+  body.cinema.landing-editing[data-le-preview="mobile"] #info .info-lede,body.cinema.landing-editing[data-le-preview="mobile"] #info .info-note{font-size:16.5px!important;line-height:1.55!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] #info .info-cinema details.info-card>summary{padding:14px 14px!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] #info .ic-body,body.cinema.landing-editing[data-le-preview="mobile"] #info .ic-body p{font-size:16px!important;line-height:1.6!important}
+
+  /* ---- HORARIOS: editorial program. Tabs in one row, placeholders as quiet program lines (not a grid of narrow cards) ---- */
+  body.cinema.landing-editing[data-le-preview="mobile"] #lineup .tabs{flex-wrap:nowrap!important;gap:8px!important;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1*var(--c-gut))!important;padding-inline:var(--c-gut)!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] #lineup .tabs::-webkit-scrollbar{display:none}
+  body.cinema.landing-editing[data-le-preview="mobile"] :is(#lineup .tabs button,.lt-tab){flex:none;white-space:nowrap;padding:0 16px!important;font-size:12px!important;letter-spacing:.1em!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] #lineup .artist-list{grid-template-columns:minmax(0,1fr)!important;gap:0!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] #lineup .artist-list span{display:flex!important;align-items:center;min-height:50px;padding:0 4px 0 14px!important;border:0!important;border-left:2px solid rgba(232,181,81,.55)!important;border-bottom:1px solid rgba(243,232,205,.12)!important;border-radius:0!important;background:none!important;box-shadow:none!important;font-size:15px!important;letter-spacing:.16em!important;opacity:.8}
+  body.cinema.landing-editing[data-le-preview="mobile"] .lt-act{padding:14px 0!important;border-bottom:1px solid rgba(243,232,205,.16)}
+  body.cinema.landing-editing[data-le-preview="mobile"] .lt-time{font:700 13px/1.2 var(--c-serif)!important;letter-spacing:.16em!important;color:#e8b551!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] .lt-name{font:700 21px/1.2 var(--c-serif)!important;letter-spacing:.04em!important}
+  body.cinema.landing-editing[data-le-preview="mobile"] .lt-stage{font-size:12px!important;opacity:.8}
+
+
+/* mobile anchors: the header height is the only scroll offset (root 76px + section scroll-margin 58px used to stack to 134px of dead space) */
+@media (max-width:767px){html{scroll-padding-top:58px!important}}
 
 /* ---- edit mode (EDITAR WEB): the cinematic header + hero are the editable header + hero; nothing may block selecting/dragging ---- */
 body.cinema.landing-editing .cin-scene::after,body.cinema.landing-editing .top::before,body.cinema.landing-editing .top::after{pointer-events:none}
@@ -587,4 +715,4 @@ body.cinema:not(.landing-editing) .info-cinema{display:grid}
 body.cinema .cinema-hero{display:flex}
 body.cinema:not(.landing-editing) .closing-links{display:flex}
 body.cinema:not(.landing-editing) .tickets-contact{display:flex}
-@media (max-width:1023px){body.cinema:not(.landing-editing) .info-cinema{grid-template-columns:1fr}}
+@media (max-width:1023px){body.cinema:not(.landing-editing) .info-cinema{grid-template-columns:minmax(0,1fr)}}

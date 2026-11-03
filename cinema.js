@@ -29,6 +29,9 @@
     doc.querySelectorAll('#lineup .kicker').forEach(k => setText(k, /^(\s*)01(\s*—)/, '$102$2'));
     doc.querySelectorAll('#lineup .kicker').forEach(k => { if (/^\s*(\\n)?\s*$/.test(k.textContent)) k.textContent = KICK.lineup; });   // default V30 state saves this kicker as a literal "\n"
     doc.querySelectorAll('#info .kicker').forEach(k => setText(k, /^(\s*)02(\s*—)/, '$101$2'));
+    /* mobile: the old saved phone state repeats the INFO intro sentence in two paragraphs; mark the repeat (attribute, not saved by the editor) so it is shown once */
+    const lede = doc.querySelector('#info .info-lede'), note = doc.querySelector('#info .info-note');
+    if (lede && note) { const t = e => e.textContent.replace(/\s+/g, ' ').trim().toLowerCase(); if (t(lede) && t(lede) === t(note)) lede.setAttribute('data-cin-dup', ''); else lede.removeAttribute('data-cin-dup'); }
     const nav = doc.querySelector('[data-le-id="cin-nav-lineup"]'); if (nav && nav.dataset.leName === 'Menú: LINE UP') nav.dataset.leName = 'Menú: HORARIOS';
   };
   relabel(); addEventListener('load', relabel);
