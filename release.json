@@ -13,9 +13,9 @@
    }
   }
  },
- "id": "20261103-0128-dd3fc343",
- "builtAt": "2026-11-03T01:28:16",
- "digest": "dd3fc343",
+ "id": "20261104-1537-1f780228",
+ "builtAt": "2026-11-04T15:37:47",
+ "digest": "1f780228",
  "prefix": "/maruatazo/",
  "designPublishedAt": "2026-11-03T05:45:59.001Z",
  "files": {
@@ -192,16 +192,16 @@
    "sha256": "f5094da820f500bee9bca95eca5252eb0984751af9032a2a6499ff350a3f5616"
   },
   "assets/title/title-1600.webp": {
-   "bytes": 277648,
-   "sha256": "a9e23f0745392a09ea4460e2d03867bf0ef193f2a8ad7006a03881b019c89b0b"
+   "bytes": 161904,
+   "sha256": "68a868b11a572c8865382961e7a426c7b430bd480e3aedd3a0af7517fb2c8e65"
   },
   "assets/title/title-900.webp": {
-   "bytes": 76484,
-   "sha256": "4e60cf7dcd9316ab6b84f956678417efff17b57902969ac5d0bf579ae7fa050e"
+   "bytes": 66906,
+   "sha256": "51d67a6d4e9ccac07e92b39e196d2c76e9c682603295b02f6106fa5d56d8a184"
   },
   "assets/title/title.png": {
-   "bytes": 792756,
-   "sha256": "ecfe70fa535a05c3c8ccbfd9338557b140c75a44d26909f3e8fa0ab9d94019b2"
+   "bytes": 716647,
+   "sha256": "0032536a69c7da89cf240156fdf6dc883463ccb5bc4732c40debdf74f699d07b"
   },
   "assets/title/xii-cream.png": {
    "bytes": 54842,
@@ -216,8 +216,8 @@
    "sha256": "26e6fa29a33a07fef96cd924728d469d8c93b7242dafd04b968425303bdd34ae"
   },
   "cinema.css": {
-   "bytes": 93200,
-   "sha256": "9be31a7fde531a0c52c20e13cb5bb278fd7275629de860ffd41fb302de6f44ce"
+   "bytes": 93595,
+   "sha256": "493848c3b93913b023fe68c6e5409315227dcaf5e9c5d2376072d51b89015b18"
   },
   "cinema.js": {
    "bytes": 12507,
@@ -229,7 +229,7 @@
   },
   "index.html": {
    "bytes": 35997,
-   "sha256": "40705870c4cbe828b3c27557925a67f94aca1b31523d75ab316bd4e9039a1bbd"
+   "sha256": "92a420368522d01e75e2513fad163f8260860bb944314504f42da1e8a2ab3650"
   },
   "landing-editor.js": {
    "bytes": 760145,
@@ -245,7 +245,7 @@
   },
   "mapa2d.html": {
    "bytes": 4576,
-   "sha256": "5f0b1b363d175334a7cf732fd97597074907ad13afa0de905cbb8ad898db9aca"
+   "sha256": "152e307a9e0d733d67aaa527c9a740071186a9524580b67f8029f6de4a7dfee2"
   },
   "mapa2d.js": {
    "bytes": 30368,

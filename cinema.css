@@ -716,3 +716,6 @@ body.cinema .cinema-hero{display:flex}
 body.cinema:not(.landing-editing) .closing-links{display:flex}
 body.cinema:not(.landing-editing) .tickets-contact{display:flex}
 @media (max-width:1023px){body.cinema:not(.landing-editing) .info-cinema{grid-template-columns:minmax(0,1fr)}}
+
+/* MERCH temporarily removed from the top navigation (section #merch, content and assets kept; delete this rule to reactivate) */
+html body.cinema .site-nav a.cin-nav[data-le-id="cin-nav-merch"],html body.cinema:not(.cin-x) .site-nav a.cin-nav[data-le-id="cin-nav-merch"],html body.cinema.landing-editing[data-le-preview] .site-nav a.cin-nav[data-le-id="cin-nav-merch"]{display:none!important}
